@@ -12,7 +12,7 @@ def main():
             name = name_list[1].strip().strip("\"") + "_" + name_list[0].strip("\"").title()
             #athlete_info as a dictionary
             athlete_info = find_info(name)
-            if (athlete_info != null):
+            if (athlete_info is not None):
               mongo_db(athlete_info)
 
 
