@@ -12,11 +12,11 @@ def main():
             name = name_list[1].strip().strip("\"") + "_" + name_list[0].strip("\"").title()
             #athlete_info as a dictionary
             athlete_info = find_info(name)
-            if (athlete_info is not None):
-              mongo_db(athlete_info)
+            # if (athlete_info is not None):
+            #   mongo_db(athlete_info)
 
 
-def mongo_db(athlete_info):
+#def mongo_db(athlete_info):
   #push into database
 
             
@@ -52,6 +52,7 @@ def find_info(name):
         athlete_info[key[0]] = value[0].strip()
 
     #print out the result
+    print (athlete_info)
     for i in athlete_info:
       print(i + ":")
       print(athlete_info[i])
