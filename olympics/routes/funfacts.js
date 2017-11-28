@@ -9,6 +9,11 @@ var db = mongojs(connectionString, ['olympics_new']);
 
 var oracledb = require('oracledb');
 var dbConfig = require('./dbconfig.js');
+var dbConfigUser = {
+    user          : dbConfig.user,
+    password      : dbConfig.password,
+    connectString : dbConfig.connectString
+  };
 
 
 router.get('/', function(req,res,next){
@@ -36,22 +41,21 @@ router.get('/countryInfo', function(req,res,next) {
 	// var gender = req.params.gender;
 	// var season = req.params.season;
 
-	oracledb.getConnection(
-  {
-    user          : dbConfig.user,
-    password      : dbConfig.password,
-    connectString : dbConfig.connectString
-  },
-  function(err, connection)
-  {
+  var sqlquery = "SELECT * " + "FROM  award";
+  sqlConnection(req,res,next,sqlquery);
+
+	
+
+});
+
+var sqlConnection = function(req,res,next,sqlquery){
+  oracledb.getConnection(dbConfigUser, function(err, connection) {
     if (err) {
       console.error(err.message);
       return;
     }
     connection.execute(
-      // The statement to execute
-      "SELECT * " +
-      "FROM  EVENT",
+      sqlquery,
       // The "bind value" 180 for the "bind variable" :id
       [],
 
@@ -64,28 +68,29 @@ router.get('/countryInfo', function(req,res,next) {
       {
         if (err) {
           console.error(err.message);
-          doRelease(connection);
+          connection.close(
+            function(err) {
+              if (err) {
+                console.error(err.message);
+              }
+          });
           return;
         }
         res.json(result);
         console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
         console.log(result.rows);     // [ [ 180, 'Construction' ] ]
-        doRelease(connection);
+        connection.close(
+          function(err) {
+            if (err) {
+              console.error(err.message);
+            }
+        });
       });
   });
 
-	var doRelease = function(connection)
-	{
-	  connection.close(
-	    function(err) {
-	      if (err) {
-	        console.error(err.message);
-	      }
-	});
 }
 
 
-});
 
 router.get('/athleteInfo', function(req,res,next) {
 	var top = req.params.top;
