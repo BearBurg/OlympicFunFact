@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="angularjsNodejsTutorial">
+    <head>
+        <title>filter here</title>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.js"></script>
+        <script src="javascripts/app.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <!-- Custom styles for this template-->
+        <link href="../css/navbar-static-top.css" rel="stylesheet">
+    </head>
+    <body  data-spy="scroll" data-target=".scrollspy">
+    	<p style="text-align:center;"><img src="olympic.jpg" alt="olympic2" ></p>
+        <header></header>
+        <!-- Static navbar-->
+        <nav role="navigation" class="navbar navbar-static-top navbar-default">
+            <div class="container">
+                <div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="#" class="navbar-brand">jump to another page</a></div>
+                <div id="navbar" class="collapse navbar-collapse">
+             
+                    <li><a href="/map">map</a></li>
+                    <li><a href="/athlete">athlete</a></li>
+                </div>
+            </div>
+        </nav>
+         <div class="container">
+            <!-- Main component for a primary marketing message or call to action-->
+            <div class="jumbotron">
+         <div ng-controller="myController">
+        <p><span aria-hidden="true" class="glyphicon text-primary glyphicon-search"></span> filter here:
+        	<select id="top">
+              <option value="one">top1</option>
+              <option value="three">top3</option>
+              <option value="five">top5</option>
+            </select>
+
+        	<select id="medals">
+              <option value="medal">all medal</option>
+              <option value="gold">gold</option>
+              <option value="silver">silver</option>
+              <option value="bronze">bronze</option>
+            </select>
+
+            <select id="sports">
+              <option value="sport">all sport</option>
+              <option value="Aeronautics">Aeronautics</option>
+              <option value="Alpine Skiing">Alpine Skiing</option>
+              <option value="Alpinism">Alpinism</option>
+              <option value="Archery">Archery</option>
+              <option value="Art Contests">Art Contests</option>
+              <option value="Athletics">Athletics</option>
+              <option value="Badminton">Badminton</option>
+              <option value="Baseball">Baseball</option>
+              <option value="Basketball">Basketball</option>
+              <option value="Basque Pelota">Basque Pelota</option>
+              <option value="Beach Volleyball">Beach Volleyball</option>
+              <option value="Biathlon">Biathlon</option>
+              <option value="Bobsleigh">Bobsleigh</option>
+              <option value="Boxing">Boxing</option>
+              <option value="Canoeing">Canoeing</option>
+              <option value="Cricket">Cricket</option>
+              <option value="Croquet">Croquet</option>
+              <option value="Cross-Country Skiing">Cross-Country Skiing</option>
+              <option value="Curling">Curling</option>
+              <option value="Cycling">Cycling</option>
+              <option value="Diving">Diving</option>
+              <option value="Equestrian">Equestrian</option>
+              <option value="Fencing">Fencing</option>
+              <option value="Field Hockey">Field Hockey</option>
+              <option value="Figure Skating">Figure Skating</option>
+              <option value="Football">Football</option>
+              <option value="Freestyle Skiing">Freestyle Skiing</option>
+              <option value="Golf">Golf</option>
+              <option value="Gymnastics">Gymnastics</option>
+              <option value="Handball">Handball</option>
+              <option value="Ice Hockey">Ice Hockey</option>
+              <option value="Jeu De Paume">Jeu De Paume</option>
+              <option value="Judo">Judo</option>
+              <option value="Lacrosse">Lacrosse</option>
+              <option value="Luge">Luge</option>
+              <option value="Military Ski Patrol">Military Ski Patrol</option>
+              <option value="Modern Pentathlon">Modern Pentathlon</option>
+              <option value="Motor Boating">Motor Boating</option>
+              <option value="Nordic Combined">Nordic Combined</option>
+              <option value="Polo">Polo</option>
+              <option value="Racquets">Racquets</option>
+              <option value="Rhythmic Gymnastics">Rhythmic Gymnastics</option>
+              <option value="Roque">Roque</option>
+              <option value="Rowing">Rowing</option>
+              <option value="Rugby">Rugby</option>
+              <option value="Sailing">Sailing</option>
+              <option value="Shooting">Shooting</option>
+              <option value="Short Track Speed Skating">Short Track Speed Skating</option>
+              <option value="Skeleton">Skeleton</option>
+              <option value="Ski Jumping">Ski Jumping</option>
+              <option value="Snowboarding">Snowboarding</option>
+              <option value="Softball">Softball</option>
+              <option value="Speed Skating">Speed Skating</option>
+              <option value="Swimming">Swimming</option>
+              <option value="Synchronized Swimming">Synchronized Swimming</option>
+              <option value="Table Tennis">Table Tennis</option>
+              <option value="Taekwondo">Taekwondo</option>
+              <option value="Tennis">Tennis</option>
+              <option value="Trampolining">Trampolining</option>
+              <option value="Triathlon">Triathlon</option>
+              <option value="Tug Of War">Tug Of War</option>
+              <option value="Volleyball">Volleyball</option>
+              <option value="Water Polo">Water Polo</option>
+              <option value="Weightlifting">Weightlifting</option>
+              <option value="Wrestling">Wrestling</option>
+            </select>
+
+            <select id="discipline">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+                <script src="script.js"></script>
+            </select>
+
+            <select id="gender">
+              <option value="genders">both gender</option>
+              <option value="male">male</option>
+              <option value="female">female</option>
+            </select>
+            <select id="season">
+              <option value="seasons">both season</option>
+              <option value="summer">summer</option>
+              <option value="winter">winter</option>
+            </select>
+
+            <button type="button" ng-click="Submit()" class="button">Show Country Infomation</button>
+        </p>
+         <table border="0" cellpadding="10" cellspacing="1" width="500" align="center"> 
+         </table>
+        
+        </div>
+    </body>
+</html>
