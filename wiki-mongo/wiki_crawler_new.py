@@ -8,31 +8,43 @@ import pymongo
 def mongo_connection():
   mongo_URL = "mongodb://mongodb-stitch-olympics-xhlhd:cis550@cis550-shard-00-00-a0sk1.mongodb.net:27017,cis550-shard-00-01-a0sk1.mongodb.net:27017,cis550-shard-00-02-a0sk1.mongodb.net:27017/test?ssl=true&replicaSet=Cis550-shard-0&authSource=admin"
   client = MongoClient(mongo_URL)
-  db = client.data.olympics
+  db = client.data.olympics_new
   return db
 
 def main():
   col = mongo_connection()
   count = 0
-  with open('Athlete.txt','r', encoding="utf-16") as f:
+  with open('Athlete_new.txt','r', encoding="utf-16") as f:
     for line in f:
       name = get_name(line)
-      athlete_info = find_info(name)
+
+      for n in name:
+        athlete_info = find_info(n)
+        if (athlete_info is not None and len(athlete_info) > 2):
+          break
+
       if (athlete_info is not None):
-        print (athlete_info)
-        # col.insert(athlete_info)
+        col.insert(athlete_info)
+        # print (athlete_info)
         print (name,"success")
       
       
 
 def get_name(raw_name):
-  name_list = raw_name.replace("\"","").split(",")
-  last_name = name_list[0].title().replace(" ","_")
+  name_list = raw_name.replace("\"","").split()
+  
+  for i in range(len(name_list)):
+    name_list[i] = name_list[i].strip().title()
+
+  last_name = name_list[-1]
+  first_name = name_list[0]
+
   if (len(name_list) >= 2):
-    first_name = name_list[1].strip().split(" ")[0]
-    return first_name + "_" + last_name
+    return [first_name + "_" + last_name]
+  elif (len(name_list) > 2):
+    return [first_name + "_" + last_name, "_".join(name_list)]
   else:
-    return last_name
+    return [last_name]
 
 
 def find_info(name):
@@ -41,10 +53,13 @@ def find_info(name):
     sause = urllib.request.urlopen(url_string).read()
   except UnicodeEncodeError:
     print (name + ": UnicodeEncodeError")
-    return
+    athlete_info = {"link":url_string,"Name":" ".join(name.split("_"))}
+    return athlete_info
   except urllib.error.HTTPError:
     print (name + ": HTTP Error 404: Not Found")
-    return
+    athlete_info = {"link":url_string,"Name":" ".join(name.split("_"))}
+    return athlete_info
+
   soup = bs.BeautifulSoup(sause,'html.parser')
 
   athlete_info = {}
@@ -63,10 +78,15 @@ def find_info(name):
       value = [i.text for i in td]
 
       if(len(key) > 0 and len(value) > 0):
-        athlete_info[key[0]] = value[0].strip()
-        # if (not key[0]):         
-        #   athlete_info[key[0]] = value[0].strip()
+        athlete_info[key[0].replace(".","")] = value[0].strip()
 
+    #print out the result
+    # print (athlete_info)
+    # for i in athlete_info:
+    #   print(i + ":")
+    #   print(athlete_info[i])
+
+    # return athlete_info
     return athlete_info
 
   except AttributeError:
@@ -75,6 +95,4 @@ def find_info(name):
 
 
 
-if __name__=="__main__":
-    main()
-        
+main()
