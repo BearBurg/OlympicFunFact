@@ -7,9 +7,14 @@ var mongojs = require('mongojs');
 var connectionString = "mongodb://cis550:cis550@cis550-shard-00-00-a0sk1.mongodb.net:27017,cis550-shard-00-01-a0sk1.mongodb.net:27017,cis550-shard-00-02-a0sk1.mongodb.net:27017/data?ssl=true&replicaSet=Cis550-shard-0&authSource=admin"
 var db = mongojs(connectionString, ['olympics_new']);
 
+var oracledb = require('oracledb');
+var dbConfig = require('./dbconfig.js');
+
 
 router.get('/', function(req,res,next){
-	res.send("funfacts");
+	// res.send("funfacts");
+	res.render('funfacts.html');
+
 })
 
 router.get('/test/:id', function(req,res,next){
@@ -19,6 +24,77 @@ router.get('/test/:id', function(req,res,next){
 		}
 		res.json(person);
 	});
+	
+});
+
+router.get('/countryInfo', function(req,res,next) {
+	// res.send("sql");
+	// var top = req.params.top;
+	// var medal = req.params.medal;
+	// var sports = req.params.sports;
+	// var discipline = req.params.discipline;
+	// var gender = req.params.gender;
+	// var season = req.params.season;
+
+	oracledb.getConnection(
+  {
+    user          : dbConfig.user,
+    password      : dbConfig.password,
+    connectString : dbConfig.connectString
+  },
+  function(err, connection)
+  {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    connection.execute(
+      // The statement to execute
+      "SELECT * " +
+      "FROM  EVENT",
+      // The "bind value" 180 for the "bind variable" :id
+      [],
+
+      // Optional execute options argument, such as the query result format
+      // or whether to get extra metadata
+      // { outFormat: oracledb.OBJECT, extendedMetaData: true },
+
+      // The callback function handles the SQL execution results
+      function(err, result)
+      {
+        if (err) {
+          console.error(err.message);
+          doRelease(connection);
+          return;
+        }
+        res.json(result);
+        console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
+        console.log(result.rows);     // [ [ 180, 'Construction' ] ]
+        doRelease(connection);
+      });
+  });
+
+	var doRelease = function(connection)
+	{
+	  connection.close(
+	    function(err) {
+	      if (err) {
+	        console.error(err.message);
+	      }
+	});
+}
+
+
+});
+
+router.get('/athleteInfo', function(req,res,next) {
+	var top = req.params.top;
+	var medal = req.params.medal;
+	var sports = req.params.sports;
+	var discipline = req.params.discipline;
+	var gender = req.params.gender;
+	var season = req.params.season;
+
 	
 });
 
