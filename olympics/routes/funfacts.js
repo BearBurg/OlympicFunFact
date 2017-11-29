@@ -33,22 +33,38 @@ router.get('/test/:id', function(req,res,next){
 });
 
 router.get('/countryInfo', function(req,res,next) {
-	// res.send("sql");
-	// var top = req.params.top;
-	// var medal = req.params.medal;
-	// var sports = req.params.sports;
-	// var discipline = req.params.discipline;
-	// var gender = req.params.gender;
-	// var season = req.params.season;
+	var year = req.query.year;
+	var medal = req.query.medal;
+	var sports = req.query.sports;
+	console.log(year);
+	console.log(medal);
+	// var discipline = req.query.discipline;
+	// var gender = req.query.gender;
+	// var season = req.query.season;
+	// var top = req.query.top;
 
-  var sqlquery = "SELECT * " + "FROM  award";
-  sqlConnection(req,res,next,sqlquery);
+ //   var sqlquery = "WITH T AS (" +
+	// "SELECT EVENT_ID " +
+	// "FROM EVENT " +
+	// "WHERE SPORT = \'Swimming\') " + 
+	// "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
+	// "FROM ( " +
+	// "SELECT * " +
+	// "FROM AWARD A " +
+	// "WHERE A.year = "+ "2016 " + "and A.EVENT_ID IN (SELECT * FROM T)" +
+	// "ORDER BY A.EVENT_ID) " +
+	// "WHERE MEDAL = " + "\'GOLD\'' " + 
+	// "GROUP BY NATIONALITY " +
+	// "ORDER BY NUM DESC";
+	// var sqlquery = "SELECT * " + "FROM EVENT " + "WHERE SPORT = \'Swimming\'";
+	var sqlquery = " WITH T AS (SELECT EVENT_ID FROM EVENT WHERE SPORT = \'Swimming\') SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM FROM (SELECT * FROM AWARD A WHERE A.year = 2016 and A.EVENT_ID IN (SELECT * FROM T) ORDER BY A.EVENT_ID) WHERE MEDAL = \'GOLD\' GROUP BY NATIONALITY ORDER BY NUM DESC ";
+  	sqlConnection(req,res,sqlquery);
 
 	
 
 });
 
-var sqlConnection = function(req,res,next,sqlquery){
+var sqlConnection = function(req,res,sqlquery){
   oracledb.getConnection(dbConfigUser, function(err, connection) {
     if (err) {
       console.error(err.message);
@@ -68,37 +84,37 @@ var sqlConnection = function(req,res,next,sqlquery){
       {
         if (err) {
           console.error(err.message);
-          connection.close(
-            function(err) {
-              if (err) {
-                console.error(err.message);
-              }
-          });
+          doRelease(connection);
           return;
         }
-        res.json(result);
+        res.json(result.rows);
         console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
         console.log(result.rows);     // [ [ 180, 'Construction' ] ]
-        connection.close(
-          function(err) {
-            if (err) {
-              console.error(err.message);
-            }
-        });
+        doRelease(connection);
       });
   });
 
 }
 
-
+function doRelease(connection)
+{
+  connection.close(
+    function(err) {
+      if (err) {
+        console.error(err.message);
+      }
+    });
+}
 
 router.get('/athleteInfo', function(req,res,next) {
-	var top = req.params.top;
-	var medal = req.params.medal;
-	var sports = req.params.sports;
-	var discipline = req.params.discipline;
-	var gender = req.params.gender;
-	var season = req.params.season;
+  var top = req.query.top;
+  var medal = req.query.medal;
+  var sports = req.query.sports;
+  var discipline = req.query.discipline;
+  var gender = req.query.gender;
+  var season = req.query.season;
+
+  res.send(top);
 
 	
 });

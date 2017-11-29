@@ -9,7 +9,7 @@ var funfacts = require('./routes/funfacts');
 
 var app = express();
 
-var port = 8000;
+var port = 8010;
 
 //View engine
 app.set('views', path.join(__dirname, 'views'));
