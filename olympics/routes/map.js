@@ -15,7 +15,7 @@ var dbConfigUser = {
 
 
 router.get('/', function(req,res,next){
-	// res.render('Olmpics.html');
+	// res.render('Olympics.html');
 
 	var year = parseInt(req.query.year,10);
 	var medal = req.query.medal;

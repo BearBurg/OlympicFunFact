@@ -20,16 +20,19 @@ var dbConfigUser = {
 
 
 router.get('/', function(req,res,next){
-  var name = req.query.name;
+  res.render('funfacts.html');
+  var top = req.query.top;
+  console.log(top);
+  // var name = req.query.name;
 
-  if (name != 'undefined') {
-  	db.olympics_new.find({$or:[{Name: RegExp(name + ' ')}, {Name: RegExp(' ' + name)}]}, function(err,person) {
-  		if (err){
-  			res.send(err);
-  		}
-  		res.json(person);
-  	});
-  }
+  // if (name != 'undefined') {
+  // 	db.olympics_new.find({$or:[{Name: RegExp(name + ' ')}, {Name: RegExp(' ' + name)}]}, function(err,person) {
+  // 		if (err){
+  // 			res.send(err);
+  // 		}
+  // 		res.json(person);
+  // 	});
+  // }
 	
 });
 
