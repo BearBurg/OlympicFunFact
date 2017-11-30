@@ -5,24 +5,30 @@ app.controller('myController', function($scope, $http) {
     //         $scope.data = data;
        // $scope.message="";
         $scope.Submit = function() {
-//             var text = '{ "employees" : [' +
-// '{ "firstName":"John" , "lastName":"Doe" },' +
-// '{ "firstName":"Anna" , "lastName":"Smith" },' +
-// '{ "firstName":"Peter" , "lastName":"Jones" } ]}';
-//         var obj = JSON.parse(text);
-//         console.log(obj.employees[1].firstName + " " + obj.employees[1].lastName);
+            var top = document.getElementById("top").value;
+            var medal = document.getElementById("medals").value;
+            var sport = document.getElementById("sports").value;
+            var gender = document.getElementById("gender").value;
+            var season = document.getElementById("season").value;
         //var request = $http.get('/countryInfo'+$scope.top+$scope.medals+$scope.sports+$scope.discipline+$scope.gender+$scope.season);
-        var request = $http.get('/countryInfo',{params: {
-            top:    $scope.top,
-            medal:  $scope.medal,
-            sports: $scope.sports,
-            discipline:$scope.discipline,
-            gender: $scope.gender,
-            season: $scope.season
+        $http.get('/',{ params: {
+            // top:    $scope.top,
+            // medal:  $scope.medals,
+            // sports: $scope.sports,
+            // discipline:$scope.discipline,
+            // gender: $scope.gender,
+            // season: $scope.season
+            top:    top,
+            medal:  'gold',
+            sports: sport,
+            gender: gender,
+            season: season
         }});
         request.success(function(data) {
             //data = {country:"aaa", num:"3"};
-            $scope.data = data;
+            //$scope.data = data;
+            $scope.NATIONALITY = data.NATIONALITY;
+            $scope.NUM = data.NUM;
         });
         request.error(function(data){
             console.log('err');
