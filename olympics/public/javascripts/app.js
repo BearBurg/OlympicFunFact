@@ -1,5 +1,6 @@
 var app = angular.module('angularjsNodejsTutorial',[]);
 app.controller('myController', function($scope, $http) {
+    $scope.title = 10;
     // data = {country:"aaa", num:"3"};
     //         console.log("data.country");
     //         $scope.data = data;
@@ -13,7 +14,7 @@ app.controller('myController', function($scope, $http) {
             // var gender = document.getElementById("gender").value;
             // var season = document.getElementById("season").value;
         //var request = $http.get('/countryInfo'+$scope.top+$scope.medals+$scope.sports+$scope.discipline+$scope.gender+$scope.season);
-        $http.get('/',{ params: {
+        $http.get('/data',{ params: {
             top:    "$scope.top",
             medal:  $scope.medals,
             sports: $scope.sports,

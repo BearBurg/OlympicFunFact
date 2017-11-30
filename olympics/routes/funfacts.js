@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// var path = require('path');
+var path = require('path');
 // var bodyParser = require('body-parser');
 //mongo db
 var mongojs = require('mongojs');
@@ -20,9 +20,8 @@ var dbConfigUser = {
 
 
 router.get('/', function(req,res,next){
-  res.render('funfacts.html');
-  var top = req.query.top;
-  console.log(top);
+  res.sendFile(path.join(__dirname, '../', 'views', 'funfacts.html'));
+  
   // var name = req.query.name;
 
   // if (name != 'undefined') {
@@ -36,6 +35,10 @@ router.get('/', function(req,res,next){
 	
 });
 
+router.get('/data',function(req,res,next){
+  var top = req.query.top;
+  console.log(top);
+})
 
 
 
