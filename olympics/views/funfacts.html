@@ -34,7 +34,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
 <!-- Top menu on small screens -->
 <header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">
-  <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>
+  <div class="w3-bar-item w3-padding-24 w3-wide">olympics</div>
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 </header>
 
@@ -51,37 +51,70 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <header class="w3-container w3-xlarge">
     <p class="w3-left"></p>
     <p class="w3-right">
-      <!-- <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i> -->
     </p>
   </header>
 
   <!-- Image header -->
   <div class="w3-display-container w3-container">
-    <img src="/images/1.jpg" alt="Jeans" style="width:100%">
+    <img src="/images/1.jpg" alt="ceremony" style="width:100%">
     <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
       <h1 class="w3-jumbo w3-hide-small">Welcome</h1>
       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
       <h1 class="w3-hide-small">olympics athlete</h1>
-      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">athlete info</a></p>
+      <p><a href="#moreAthlete" class="w3-button w3-black w3-padding-large w3-large">athlete info</a></p>
     </div>
   </div>
 
-  <div class="w3-container w3-text-grey" id="jeans">
-    <p>8 athletes</p>
+  <div class="w3-container w3-text-grey" id="moreAthlete">
+    <p>8 famous athletes</p>
   </div>
 
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
-    <div class="w3-col l3 s6">
+    <!-- <div class="w3-col l3 s6">
       <div class="w3-container">
         <img src="/images/Guo_Jingjing.jpg" style="width:100%">
-        <p>JingJing Guo<br><b></b></p>
+        <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getJ()" class="w3-button w3-blac">Get Infos<i ></i></button>
+          </div> -->
+        <!-- <p>JingJing Guo<br><b></b></p>
       </div>
+      <p>JingJing Guo<br><b></b></p>
       <div class="w3-container">
         <img src="/images/Lin_Dan.jpg" style="width:100%">
         <p>Dan Lin<br><b></b></p>
       </div>
+    </div> -->
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="/images/Guo_Jingjing.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getJ()" class="w3-button w3-black">Get Info<i ></i></button>
+          </div>
+        </div>
+        <p>Jingjing Guo<br><b></b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="/images/Lin_Dan.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getL()" class="w3-button w3-black">Get Info<i ></i></button>
+          </div>
+        </div>
+        <p>Dan Lin <br><b></b></p>
+      </div>
+
+      <!-- <div class="w3-container">
+        <img src="/images/Lin_Dan.jpg" style="width:100%">
+        <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getJ()" class="w3-button w3-black">Get Info<i ></i></button>
+          </div>
+        <p>Dan Lin<br><b></b></p>
+      </div> -->
     </div>
 
     <div class="w3-col l3 s6">
@@ -95,23 +128,45 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         </div>
         <p>Michael Phelps<br><b></b></p>
       </div>
+
       <div class="w3-container">
-        <img src="/images/Nadia_Comăneci.jpg" style="width:100%">
+        <div class="w3-display-container">
+          <img src="/images/Nadia_Comăneci.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getN()" class="w3-button w3-black">Get Info<i ></i></button>
+          </div>
+        </div>
         <p>Nadia Comăneci<br><b></b></p>
       </div>
+
+      <!-- <div class="w3-container">
+        <img src="/images/Nadia_Comăneci.jpg" style="width:100%">
+        <p>Nadia Comăneci<br><b></b></p>
+      </div> -->
     </div>
 
     <div class="w3-col l3 s6">
       <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="/images/reiner-klimke.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button onclick = "getR()" class="w3-button w3-black">Get Info<i ></i></button>
+          </div>
+        </div>
+        <p>einer klimke<br><b></b></p>
+      </div>
+      <!-- <div class="w3-container">
         <img src="/images/reiner-klimke.jpg" style="width:100%">
         <p>reiner klimke<br><b></b></p>
-      </div>
+      </div> -->
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="/images/STEVEN REDGRAVE.jpg" style="width:100%">
           <!-- <span class="w3-tag w3-display-topleft">Sale</span> -->
           <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black">Get Info <i></i></button>
+            <button class="w3-button w3-black" onclick = "getS()">Get Info <i></i></button>
           </div>
         </div>
         <p>Steven Redgrave<br><b class="w3-text-red"></b></p>
@@ -120,14 +175,28 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
     <div class="w3-col l3 s6">
       <div class="w3-container">
-        <img src="/images/Usain_Bolt.jpg" style="width:100%">
-        <p>Usain Bolt<br><b></b></p>
+        <div class="w3-display-container">
+          <img src="/images/Usain_Bolt.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">Sale</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black" onclick = "getU()">Get Info <i></i></button>
+          </div>
+        </div>
+        <p>Usain Bolt<br><b class="w3-text-red"></b></p>
       </div>
       <div class="w3-container">
-        <img src="/images/VALENTINA _VEZZALI.jpg" style="width:100%">
-        <p>Valentina  Vezzali<br><b></b></p>
+        <div class="w3-display-container">
+          <img src="/images/VALENTINA _VEZZALI.jpg" style="width:100%">
+          <!-- <span class="w3-tag w3-display-topleft">Sale</span> -->
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black" onclick = "getV()">Get Info <i></i></button>
+          </div>
+        </div>
+        <p>Valentina  Vezzali<br><b class="w3-text-red"></b></p>
       </div>
+
     </div>
+
   </div>
 
   <!-- Subscribe section -->
@@ -140,8 +209,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   
   <!-- Footer -->
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
-    <div class="w3-row-padding">
-      <div class="w3-col s4">
+    <div class="w3-row-padding"> CIS550 olympics group3
+      <!-- <div class="w3-col s4">
         <h4>Contact</h4>
         <p>Questions? Go ahead.</p>
         <form action="/action_page.php" target="_blank">
@@ -181,7 +250,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
         <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
         <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
         <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
-      </div>
+      </div> -->
     </div>
   </footer>
 
@@ -194,13 +263,11 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
-      <span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+      <span onclick="mute()" class="w3-button w3-display-topright w3-large">x</span>
+      <!-- <span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span> -->
       <h1>Athlete Info</h1>
     </div>
     <div id = "mongod" class="w3-container">
-      <!-- <h5>Tomato Soup <b>$2.50</b></h5>
-      <h5>Chicken Salad <b>$3.50</b></h5>
-      <h5>Bread and Butter <b>$1.00</b></h5> -->
     </div>
     <!-- <div class="w3-container w3-black">
       <h1>Main Courses</h1>
@@ -225,8 +292,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </div>
 
 <!-- Michael_Phelps Info-->
-<div id="Phelps" onchange = "printInfo()"; class="w3-modal">
-
+<div id="Phelps"  class="w3-modal">
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="document.getElementById('Phelps').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
@@ -243,6 +309,129 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     </div>
   </div>
 </div>
+
+<!-- Jingjing Guo Info-->
+<div id="Jingjing"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Jingjing').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Guo Jingjing</b></h5>
+      <h5>Full name: <b>Guo Jingjing</b></h5>
+      <h5>National team: <b>China</b></h5>
+      <h5>Born: <b>(1981-10-15) October 15, 1981 (age 36) Baoding, Hebei, China</b></h5>
+      <h5>Height: <b>5 ft 4 in (163 cm)</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Dan Lin Info-->
+<div id="Dan"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Dan').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Lin Dan</b></h5>
+      <h5>Nickname: <b>Super Dan</b></h5>
+      <h5>National team: <b>China</b></h5>
+      <h5>Born: <b>(1983-10-14) October 14, 1983 (age 34) Longyan, Fujian, China"</b></h5>
+      <h5>Height: <b>1.78 m (5 ft 10 in)</b></h5>
+      <h5>Weight: <b>70 kg (154 lb)</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Bolt Info-->
+<div id="Bolt"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Bolt').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Usain Bolt</b></h5>
+      <h5>Full name: <b>Usain St Leo Bolt</b></h5>
+      <h5>Nickname: <b>Lightning Bolt</b></h5>
+      <h5>Nationality: <b>Jamaican</b></h5>
+      <h5>Born: <b>(1986-08-21) 21 August 1986 (age 31) Sherwood Content, Jamaica</b></h5>
+      <h5>Height: <b>1.95 m (6 ft 5 in)</b></h5>
+      <h5>Weight: <b>94 kg (207 lb)</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Nadia Comaneci Info-->
+<div id="Nadia"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Nadia').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Nadia Comaneci</b></h5>
+      <h5>Full name: <b>Nadia Elena Comăneci</b></h5>
+      <h5>Nickname: <b>Nadia</b></h5>
+      <h5>Nationality: <b>Romania</b></h5>
+      <h5>Born: <b>(1961-11-12) November 12, 1961 (age 56) Onești, Romania</b></h5>
+      <h5>Height: <b>5 ft 4 in (1.63 m)</b></h5>
+      <h5>Discipline: <b>Women's artistic gymnastics</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Reiner Klimke Info-->
+<div id="Reiner"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Reiner').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Reiner Klimke</b></h5>
+      <h5>Nationality: <b>Romania</b></h5>
+      <h5>Born: <b>14 January 1936 Münster, Germany</b></h5>
+      <h5>Height: <b>1.84 m (6 ft 0 in)</b></h5>
+      <h5>Weight: <b>66 kg (146 lb)</b></h5>
+      <h5>Sport: <b>Equestrianism</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Valentina Vezzali Info-->
+<div id="Valentina"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Valentina').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Valentina Vezzali</b></h5>
+      <h5>Full Name: <b>Maria Valentina Vezzali</b></h5>
+      <h5>Nick Name: <b>Cobra</b></h5>
+      <h5>Country represented: <b>Italy</b></h5>
+      <h5>Born: <b>(1974-02-14) 14 February 1974 (age 43) Iesi, Italy</b></h5>
+      <h5>Weapon: <b>Foil</b></h5>
+      <h5>Hand: <b>right-handed</b></h5>
+    </div>
+  </div>
+</div>
+
+<!-- Steven Redgrave Info-->
+<div id="Steven"  class="w3-modal">
+  <div class="w3-modal-content w3-animate-zoom">
+    <div class="w3-container w3-black w3-display-container">
+      <span onclick="document.getElementById('Steven').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+    </div>
+    <div id = "inner1" class="w3-container">
+      <h5>Name: <b>Steven Redgrave</b></h5>
+      <h5>Full Name: <b>Steven Geoffrey Redgrave</b></h5>
+      <h5>Education: <b>Great Marlow School</b></h5>
+      <h5>Country represented: <b>British</b></h5>
+      <h5>Born: <b>(1962-03-23) 23 March 1962 (age 55) Marlow, Buckinghamshire, UK</b></h5>
+      <h5>Occupation: <b>Rower</b></h5>
+      <h5>Height: <b>6 ft 4.75 in (1.9495 m)</b></h5>
+    </div>
+  </div>
+</div>
+
 
 
 <!-- Newsletter Modal -->
@@ -277,7 +466,7 @@ function myAccFunc() {
     }
 }
 function printInfo() {
-  alert("Xiang");
+  
 }
 
 // Click on the "Jeans" link on page load to open the accordion for demo purposes
@@ -299,7 +488,7 @@ function getInfo() {
         if(name === "") {
             alert("please enter an athlete name");
         } else {
-            // alert("getting the info now")
+            // alert(name);
         }
         var data = {};
         data.name = name;
@@ -310,6 +499,7 @@ function getInfo() {
             contentType: 'application/json',
             url: 'http://localhost:8010/funfacts', 
             success: function(data) {
+              if(data.length > 0) {
               for(var i = 0; i < data.length; i++) {
                 var p = document.createElement("P");
                 for (var k in data[i]) {
@@ -323,7 +513,15 @@ function getInfo() {
               } 
               document.getElementById('mongod').appendChild(p);
               }                                
+            } else {
+              var p = document.createElement("P");
+              var content = "no information found";
+              var t = document.createTextNode(content);
+              p.appendChild(t);
+              document.getElementById('mongod').appendChild(p);
+
             }
+          }
 
         });
         document.getElementById('menu').style.display='block';
@@ -336,7 +534,39 @@ function getInfo() {
 
       function getM() {
         document.getElementById('Phelps').style.display='block';
+      }
 
+      function getJ() {
+        document.getElementById('Jingjing').style.display='block';
+      }
+
+      function getL() {
+        document.getElementById('Dan').style.display='block';
+      }
+
+      function getU() {
+        document.getElementById('Bolt').style.display='block';
+      }
+
+      function getN() {
+        document.getElementById('Nadia').style.display='block';
+      }
+
+      function getR() {
+        document.getElementById('Reiner').style.display='block';
+      }
+
+      function getV() {
+        document.getElementById('Valentina').style.display='block';
+      }
+
+      function getS() {
+        document.getElementById('Steven').style.display='block';
+      }
+
+      function mute() {
+        document.getElementById('menu').style.display='none'
+        document.getElementById('mongod').innerHTML = "";
       }
 </script>
 
