@@ -9,7 +9,7 @@ var funfacts = require('./routes/funfacts');
 
 var app = express();
 
-var port = 8024;
+var port = 8010;
 
 //View engine
 app.set('views', path.join(__dirname, 'views'));
@@ -17,7 +17,7 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 //set Static Folder
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : false}));
@@ -31,4 +31,3 @@ app.listen(port, function(){
 	console.log('Server started on port ' + port);
 })
 
-module.exports = app;
