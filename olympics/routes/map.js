@@ -147,6 +147,7 @@ var sqlConnection = function(req,res,sqlquery){
   oracledb.getConnection(dbConfigUser, function(err, connection) {
     if (err) {
       console.error(err.message);
+      doRelease(connection);
       return;
     }
     connection.execute(
@@ -170,6 +171,7 @@ var sqlConnection = function(req,res,sqlquery){
         console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
         console.log(result.rows);     // [ [ 180, 'Construction' ] ]
         doRelease(connection);
+        return;
       });
   });
 

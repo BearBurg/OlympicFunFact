@@ -497,7 +497,7 @@ function getInfo() {
             // data: JSON.parse(data),
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:8010/funfacts', 
+            url: 'http://localhost:8010/funfacts/info', 
             success: function(data) {
               if(data.length > 0) {
               for(var i = 0; i < data.length; i++) {
