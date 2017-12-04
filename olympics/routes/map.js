@@ -80,9 +80,13 @@ router.get('/', function(req,res,next){
   }
   //all default
   else if (year == 0 && medal === 'empty' && sports === 'empty') {
-    var sqlquery =  "SELECT C.NATION, P.TOTAL " +
-                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
-                    "ORDER BY P.TOTAL ";
+    var sqlquery =  "WITH Summation AS ( " +
+                    "SELECT P.NOC, SUM(P.TOTAL) AS SUM " +
+                    "FROM PARTICIPATE P " +
+                    "GROUP BY P.NOC) " +
+                    "SELECT C.Nation, Summation.SUM " +
+                    "FROM Summation NATURAL JOIN COUNTRY C " +
+                    "ORDER BY Summation.SUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
 
