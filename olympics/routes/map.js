@@ -28,7 +28,7 @@ router.get('/', function(req,res,next){
 		var sqlquery =  "WITH S AS ( " +
                     "SELECT EVENT_ID " +
                     "FROM EVENT " +
-                    "WHERE SPORT = '" + sports + "') " +
+                    "WHERE SPORT = '" + sports + "'), " +
                     " T AS ( " +
                     " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
                     " FROM AWARD A " +
@@ -36,7 +36,7 @@ router.get('/', function(req,res,next){
                     " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
                     " SELECT Nationality, COUNT(MEDAL) AS NUM " +
                     " FROM T " +
-                    " GROUP BY NATIONALITY "
+                    " GROUP BY NATIONALITY " +
                     " ORDER BY NUM DESC ";
     console.log(sqlquery);
 	  sqlConnection(req,res,sqlquery);
@@ -46,7 +46,7 @@ router.get('/', function(req,res,next){
     var sqlquery =  "WITH S AS ( " +
                     "SELECT EVENT_ID " +
                     "FROM EVENT " +
-                    "WHERE SPORT = '" + sports + "') " +
+                    "WHERE SPORT = '" + sports + "'), " +
                     " T AS ( " +
                     " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
                     " FROM AWARD A " +
@@ -54,7 +54,7 @@ router.get('/', function(req,res,next){
                     " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
                     " SELECT Nationality, COUNT(MEDAL) AS NUM " +
                     " FROM T " +
-                    " GROUP BY NATIONALITY "
+                    " GROUP BY NATIONALITY " +
                     " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
@@ -64,7 +64,7 @@ router.get('/', function(req,res,next){
     var sqlquery =  "WITH S AS ( " +
                     "SELECT EVENT_ID " +
                     "FROM EVENT " +
-                    "WHERE SPORT = '" + sports + "') " +
+                    "WHERE SPORT = '" + sports + "'), " +
                     " T AS ( " +
                     " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
                     " FROM AWARD A " +
@@ -72,7 +72,7 @@ router.get('/', function(req,res,next){
                     " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
                     " SELECT Nationality, COUNT(MEDAL) AS NUM " +
                     " FROM T " +
-                    " GROUP BY NATIONALITY "
+                    " GROUP BY NATIONALITY " +
                     " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
@@ -81,7 +81,7 @@ router.get('/', function(req,res,next){
   //all default
   else if (year == 0 && medal === 'empty' && sports === 'empty') {
     var sqlquery =  "SELECT C.NATION, P.TOTAL " +
-                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C "
+                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
                     "ORDER BY P.TOTAL ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
@@ -91,7 +91,7 @@ router.get('/', function(req,res,next){
   //medal
   else if (year == 0 && !(medal === 'empty') && sports === 'empty'){
     var sqlquery =  "WITH Summation AS ( " +
-                    "SELECT P.NOC, SUM(P.'" + medal + "') AS SUM " +
+                    "SELECT P.NOC, SUM(P." + medal + ") AS SUM " +
                     "FROM PARTICIPATE P " +
                     "GROUP BY P.NOC) " +
                     "SELECT C.Nation, Summation.SUM " +
@@ -102,10 +102,10 @@ router.get('/', function(req,res,next){
   }
   //year medal
   else if (year != 0 && !(medal === 'empty') && sports === 'empty'){
-    var sqlquery =  "SELECT C.NATION, P.'" + medal + "' " +
+    var sqlquery =  "SELECT C.NATION, P." + medal + " " +
                     "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
-                    "WHERE P.YEAR = '" + year + "' "
-                    "ORDER BY P.'" + medal + "' DESC ";
+                    "WHERE P.YEAR = '" + year + "' " +
+                    "ORDER BY P." + medal + " DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   }
@@ -114,7 +114,7 @@ router.get('/', function(req,res,next){
     var sqlquery =  "WITH S AS ( " +
                     "SELECT EVENT_ID " +
                     "FROM EVENT " +
-                    "WHERE SPORT = '" + sports + "') " +
+                    "WHERE SPORT = '" + sports + "'), " +
                     " T AS ( " +
                     " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
                     " FROM AWARD A " +
@@ -122,7 +122,7 @@ router.get('/', function(req,res,next){
                     " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
                     " SELECT Nationality, COUNT(MEDAL) AS NUM " +
                     " FROM T " +
-                    " GROUP BY NATIONALITY "
+                    " GROUP BY NATIONALITY " +
                     " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
@@ -131,7 +131,7 @@ router.get('/', function(req,res,next){
   else if (year != 0 && medal === 'empty' && sports === 'empty'){
     var sqlquery =  "SELECT C.NATION, P.TOTAL " +
                     "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
-                    "WHERE P.YEAR = '" + year + "' "
+                    "WHERE P.YEAR = '" + year + "' " +
                     "ORDER BY P.TOTAL DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
