@@ -28,11 +28,15 @@ router.get('/', function(req,res,next){
 });
 
 router.post('/', function(req, res, next) {
-
 	var name = req.body.name;
-	name = name.replace(" ","_");
-	console.log(name);
-	db.olympics_new.find({$or:[{Name: RegExp(name + ' ')}, {Name: RegExp(' ' + name)}]}, {"_id":0},function(err,person) {
+	console.log("name: " + name);
+	var nameList = name.trim().split(" ");
+	console.log(nameList);
+	var name1 = nameList[0] ;
+	var name2 = nameList[1] ;
+	console.log("name1: "+name1);
+	console.log("name2: "+name2)
+	db.olympics_new.find({$and: [{ Name : {'$regex' : name1, '$options' : 'i'}}, { Name : {'$regex' : name2, '$options' : 'i'} } ]}, {"_id":0},function(err,person) {
     if (err){
      res.send(err);
     }
