@@ -73,40 +73,9 @@ router.post('/awards', function(req,res,next) {
 });
 
 router.get('/test', function(req, res, next) {
+	var result =[[2000,"Springboard","Sydney","Summer","SILVER"],[2000,"Synchronised Springboard","Sydney","Summer","SILVER"],[2004,"Springboard","Athens","Summer","GOLD"],[2004,"Synchronised Springboard","Athens","Summer","GOLD"],[2008,"Springboard","Beijing","Summer","GOLD"],[2008,"Synchronised Springboard","Beijing","Summer","GOLD"]];
 
-	var name = "Guo Jingjing";
-	console.log("name: " + name);
-	var nameList = name.trim().split(" ");
-	console.log(nameList);
-	var name1 = nameList[0] ;
-	var name2 = nameList[1] ;
-	console.log("name1: "+name1);
-	console.log("name2: "+name2)
-	db.olympics_new.find({$and: [{ Name : {'$regex' : name1, '$options' : 'i'}}, { Name : {'$regex' : name2, '$options' : 'i'} } ]}, {"_id":0},function(err,person) {
-    if (err){
-     res.send(err);
-    }
-    console.log(person.length);
-    res.json(person);
-
-   });
-
-	var name_sql1 = nameList[0] + " " + nameList[1] ;
-	var name_sql2 = nameList[1] + " " + nameList[0]  ;
-
-	var sqlquery = "with T1 as (SELECT athlete_id " +
-					"FROM athlete " +
-					"where name = '"+ name_sql1 +"' or name = '" + name_sql2 + "'), " +
-					"T2 as (select year,medal,event " +
-					"from award a natural join event e " + 
-					"where a.athlete_id in (select * from T1)) " +
-					"select o.year,event,city,season,medal " +
-					"from T2 inner join olympics o on T2.year=o.year";
-
-	console.log(sqlquery);
-
-  	sqlConnection(req,res,sqlquery);
-
+	res.json(result);
 
 });
 
