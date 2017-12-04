@@ -25,52 +25,64 @@ router.get('/', function(req,res,next){
 
   //year medal sports 
 	if (year != 0 && !(medal === 'empty') && !(sports === 'empty')) {
-		var sqlquery = " WITH T AS (SELECT EVENT_ID FROM EVENT WHERE SPORT = '" + sports + 
-    "') SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM FROM (SELECT * FROM AWARD A WHERE A.year = " + year + 
-    " and A.EVENT_ID IN (SELECT * FROM T) AND MEDAL = '" + medal + 
-    "') GROUP BY NATIONALITY ORDER BY NUM DESC ";
+		var sqlquery =  "WITH S AS ( " +
+                    "SELECT EVENT_ID " +
+                    "FROM EVENT " +
+                    "WHERE SPORT = '" + sports + "') " +
+                    " T AS ( " +
+                    " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
+                    " FROM AWARD A " +
+                    " WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.MEDAL = '" + medal + "' AND A.YEAR = '" + year + "' " +
+                    " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
+                    " SELECT Nationality, COUNT(MEDAL) AS NUM " +
+                    " FROM T " +
+                    " GROUP BY NATIONALITY "
+                    " ORDER BY NUM DESC ";
     console.log(sqlquery);
 	  sqlConnection(req,res,sqlquery);
   } 
   //medal sports
   else if (year == 0 && !(medal === 'empty') && !(sports === 'empty')) {
-    var sqlquery = "WITH T AS ( " + 
-                    "SELECT EVENT_ID " + 
-                    "FROM EVENT " + 
+    var sqlquery =  "WITH S AS ( " +
+                    "SELECT EVENT_ID " +
+                    "FROM EVENT " +
                     "WHERE SPORT = '" + sports + "') " +
-                    "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE A.EVENT_ID IN (SELECT * FROM T) AND MEDAL = '" + medal +
-                    "') " +
-                    "GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC ";
+                    " T AS ( " +
+                    " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
+                    " FROM AWARD A " +
+                    " WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.MEDAL = '" + medal + "' " +
+                    " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
+                    " SELECT Nationality, COUNT(MEDAL) AS NUM " +
+                    " FROM T " +
+                    " GROUP BY NATIONALITY "
+                    " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   } 
   //sports
   else if (year == 0 && medal === 'empty' && !(sports === 'empty')) {
-    var sqlquery = "WITH T AS ( " + 
-                    "SELECT EVENT_ID " + 
-                    "FROM EVENT " + 
+    var sqlquery =  "WITH S AS ( " +
+                    "SELECT EVENT_ID " +
+                    "FROM EVENT " +
                     "WHERE SPORT = '" + sports + "') " +
-                    "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE A.EVENT_ID IN (SELECT * FROM T) " +
-                    "ORDER BY A.EVENT_ID) " +
-                    " GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC "
+                    " T AS ( " +
+                    " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
+                    " FROM AWARD A " +
+                    " WHERE A.EVENT_ID IN (SELECT * FROM S) " +
+                    " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
+                    " SELECT Nationality, COUNT(MEDAL) AS NUM " +
+                    " FROM T " +
+                    " GROUP BY NATIONALITY "
+                    " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
 
   }
   //all default
   else if (year == 0 && medal === 'empty' && sports === 'empty') {
-    var sqlquery = "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM AWARD A " +
-                    "GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC ";
+    var sqlquery =  "SELECT C.NATION, P.TOTAL " +
+                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C "
+                    "ORDER BY P.TOTAL ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
 
@@ -78,52 +90,49 @@ router.get('/', function(req,res,next){
   }
   //medal
   else if (year == 0 && !(medal === 'empty') && sports === 'empty'){
-    var sqlquery = "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE MEDAL = '" + medal +
-                    "') " +
-                    "GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC ";
+    var sqlquery =  "WITH Summation AS ( " +
+                    "SELECT P.NOC, SUM(P.'" + medal + "') AS SUM " +
+                    "FROM PARTICIPATE P " +
+                    "GROUP BY P.NOC) " +
+                    "SELECT C.Nation, Summation.SUM " +
+                    "FROM Summation NATURAL JOIN COUNTRY C " +
+                    "ORDER BY Summation.SUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   }
   //year medal
   else if (year != 0 && !(medal === 'empty') && sports === 'empty'){
-    var sqlquery = "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE MEDAL = '" + medal +
-                    "' AND YEAR = "+ year + ") " +
-                    "GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC ";
+    var sqlquery =  "SELECT C.NATION, P.'" + medal + "' " +
+                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
+                    "WHERE P.YEAR = '" + year + "' "
+                    "ORDER BY P.'" + medal + "' DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   }
   //year sports
   else if (year != 0 && medal === 'empty' && !(sports === 'empty')){
-    var sqlquery = "WITH T AS ( " + 
-                    "SELECT EVENT_ID " + 
-                    "FROM EVENT " + 
+    var sqlquery =  "WITH S AS ( " +
+                    "SELECT EVENT_ID " +
+                    "FROM EVENT " +
                     "WHERE SPORT = '" + sports + "') " +
-                    "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE A.EVENT_ID IN (SELECT * FROM T) " +
-                    "AND YEAR = "+ year +") " +
-                    " GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC "
+                    " T AS ( " +
+                    " SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
+                    " FROM AWARD A " +
+                    " WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.YEAR = '" + year + "' " +
+                    " GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR) " +
+                    " SELECT Nationality, COUNT(MEDAL) AS NUM " +
+                    " FROM T " +
+                    " GROUP BY NATIONALITY "
+                    " ORDER BY NUM DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   }
   //year
   else if (year != 0 && medal === 'empty' && sports === 'empty'){
-    var sqlquery = "SELECT NATIONALITY, count(distinct EVENT_ID) AS NUM " +
-                    "FROM ( SELECT * " +
-                    "FROM AWARD A " +
-                    "WHERE YEAR = "+ year +") " +
-                    " GROUP BY NATIONALITY " +
-                    "ORDER BY NUM DESC "
+    var sqlquery =  "SELECT C.NATION, P.TOTAL " +
+                    "FROM PARTICIPATE P NATURAL JOIN COUNTRY C " +
+                    "WHERE P.YEAR = '" + year + "' "
+                    "ORDER BY P.TOTAL DESC ";
     console.log(sqlquery);
     sqlConnection(req,res,sqlquery);
   }
