@@ -4,7 +4,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var map = require('./routes/map2');
+var map = require('./routes/map');
 var funfacts = require('./routes/funfacts');
 
 var app = express();
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 
 /* GET home page. */
 app.use('/', index);
-app.use('/map2', map);
+app.use('/map', map);
 app.use('/funfacts', funfacts);
 
 app.listen(port, function(){

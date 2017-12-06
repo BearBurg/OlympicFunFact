@@ -192,13 +192,20 @@
 
     var mapdata;
     var plots;
-    var medalData;
+    var medalData = "empty";
     var genderData;
-    var yearData;
-    var sportData;
+    var yearData = 0;
+    var sportData = "empty";
 
 
     var positions = {
+        "0":{
+            "city1":{
+                "name":"",
+                "Latitude": 666666,
+                "Longitude":26666
+            }
+        },
         "1896":{
             "city1":{
                 "name":"Athens",
@@ -545,8 +552,8 @@
 
      var plots = {
                 "city1":{
-                    "latitude": 0,
-                    "longitude":0,
+                    "latitude": 5900,
+                    "longitude":6666,
                     "text":{
                         "content":"test"
                     }
@@ -716,10 +723,10 @@
                             }
                         },
                         "BY": {
-                            "value": 68,
+                            "value": 0,
                             "href": "http://en.wikipedia.org/w/index.php?search=Belarus",
                             "tooltip": {
-                                "content": "<span style=\"font-weight:bold;\">Belarus</span><br />Medal : 68"
+                                "content": "<span style=\"font-weight:bold;\">Belarus</span><br />Medal : 0"
                             }
                         },
                         "MM": {
@@ -2123,17 +2130,17 @@
 
 
       function submitFunction(){
-            if(medalData == undefined || medalData  == null  || genderData=== undefined || genderData == null ||yearData == undefined || yearData== null || sportData == null || sportData == undefined ){
-                alert("Please select all conditions");
-            } else{
-                alert("now submitting the data!");
+            // if(medalData == undefined || medalData  == null  || genderData=== undefined || genderData == null ||yearData == undefined || yearData== null || sportData == null || sportData == undefined ){
+            //     alert("Please select all conditions");
+            // } else{
+            //     alert("now submitting the data!");
 
                 var data = {};
                 data.medalData = medalData;
                 data.genderData = genderData;
                 data.yearData = yearData;
                 data.sportData = sportData;
-                alert(data.medalData);
+                // alert(data.medalData);
 
 
                     $.ajax({
@@ -2144,9 +2151,9 @@
                         success: function(data) {
                             console.log("success");
                             //alert(JSON.stringify(data));
-                            alert(data.France);
-                            alert(data.SouthAfrica);
-                            alert(yearData);
+                            // alert(data.France);
+                            // alert(data.SouthAfrica);
+                            // alert(yearData);
 
                             city1 = positions[''+yearData+'']['city1']['name'];
                             //alert(city1);
@@ -2156,7 +2163,7 @@
 
 
 
-                            alert(JSON.stringify(plots));
+                            // alert(JSON.stringify(plots));
 
                              Object.keys(plots).forEach(function(key) {
                                 plots[key]['latitude'] = latitude1;
@@ -2165,7 +2172,7 @@
                                 key = city1;
                              });
 
-                            alert(JSON.stringify(plots));
+                            // alert(JSON.stringify(plots));
 
                             // alert(city1);
                             // alert(latitude1);
@@ -2329,10 +2336,10 @@
                                                     }
                                                 },
                                                 "BY": {
-                                                    "value": 68,
+                                                    "value": 0,
                                                     "href": "http://en.wikipedia.org/w/index.php?search=Belarus",
                                                     "tooltip": {
-                                                        "content": "<span style=\"font-weight:bold;\">Belarus</span><br />Medal : "+data.Belarus+""
+                                                        "content": "<span style=\"font-weight:bold;\">Belarus</span><br />Medal : 0"
                                                     }
                                                 },
                                                 "MM": {
@@ -2931,7 +2938,7 @@
                                                     }
                                                 },
                                                 "MY": {
-                                                    "value": 7,
+                                                    "value": data.Malaysia,
                                                     "href": "http://en.wikipedia.org/w/index.php?search=Malaysia",
                                                     "tooltip": {
                                                         "content": "<span style=\"font-weight:bold;\">Malaysia</span><br />Medal: "+data.Malaysia+""
@@ -3197,17 +3204,17 @@
                                                     }
                                                 },
                                                 "GB": {
-                                                    "value": data.UnitedKingdom,
+                                                    "value": data.GreatBritain,
                                                     "href": "http://en.wikipedia.org/w/index.php?search=United Kingdom",
                                                     "tooltip": {
-                                                        "content": "<span style=\"font-weight:bold;\">United Kingdom</span><br />Medal : "+data.UnitedKingdom+""
+                                                        "content": "<span style=\"font-weight:bold;\">United Kingdom</span><br />Medal : "+data.GreatBritain+""
                                                     }
                                                 },
                                                 "RU": {
-                                                    "value": data.Russian,
+                                                    "value": data.Russia,
                                                     "href": "http://en.wikipedia.org/w/index.php?search=Russian Federation",
                                                     "tooltip": {
-                                                        "content": "<span style=\"font-weight:bold;\">Russian Federation</span><br />Medal :"+data.Russian+""
+                                                        "content": "<span style=\"font-weight:bold;\">Russian Federation</span><br />Medal :"+data.Russia+""
                                                     }
                                                 },
                                                 "RW": {
@@ -3666,7 +3673,7 @@
                                             });
                                                   
                                         }
-      }
+      
 
     </script>
 </head>
@@ -3709,16 +3716,16 @@
 
   <span><label>Medal</label></span>
      <select name="filterByMedal" id = "filterByMedal"  onchange="getMedal()">
-                                                    <option  value = "empty">All Medals</option>
-                                                    <option value ="Gold">Gold</option>
-                                                    <option value ="Silver">Silver</option>
-                                                    <option value ="Bronze">Bronze</option>
+                                                    <option value = "empty">All</option>
+                                                    <option value ="GOLD">Gold</option>
+                                                    <option value ="SILVER">Silver</option>
+                                                    <option value ="BRONZE">Bronze</option>
      </select>
   </div>
 
 
 
-  <div class = namefilter>
+<!--   <div class = namefilter>
 
   <span><label>Gender</label></span>
          <select name="filterByGender" id = "filterByGender"  onchange="getGender()">
@@ -3726,7 +3733,7 @@
                                                         <option value ="Male">Male</option>
                                                         <option value ="Female">Female</option>
          </select>
-  </div>
+  </div> -->
 
 
 
