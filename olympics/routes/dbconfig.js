@@ -67,16 +67,16 @@
  *****************************************************************************/
 
 module.exports = {
-  user          : "Oly2017",
+  user          : "group3",
 
   // Instead of hard coding the password, consider prompting for it,
   // passing it in an environment variable via process.env, or using
   // External Authentication.
-  password      : "olympics2017",
+  password      : "cis550xzls",
 
   // For information on connection strings see:
   // https://github.com/oracle/node-oracledb/blob/master/doc/api.md#connectionstrings
-  connectString : "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=mydb.csegfaxlivkw.us-west-2.rds.amazonaws.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=orcl)))",
+  connectString : "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=mydb.cikp7kfsogfb.us-east-2.rds.amazonaws.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCL)))",
 
   // Setting externalAuth is optional.  It defaults to false.  See:
   // https://github.com/oracle/node-oracledb/blob/master/doc/api.md#extauth
