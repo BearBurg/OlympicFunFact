@@ -428,25 +428,25 @@ function getInfo() {
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: 'http://localhost:8010/funfacts/info', 
+            url: './info', 
             success: function(data) {
               // alert(data.persons[0].Name);
               // console.log(data.awards[0]);
-              if(data.persons.length > 0) {
-              for(var i = 0; i < data.persons.length; i++) {
+              if(data.length > 0) {
+              for(var i = 0; i < data.length; i++) {
                 var p = document.createElement("P");
-                for (var k in data.persons[i]) {
+                for (var k in data[i]) {
                   var content = "";
                   if (k ==="link"){
                   // content = content + k + ": " + data[i][k].link(data[i][k]);
-                  var linka = data.persons[i][k];
+                  var linka = data[i][k];
                   var result = linka.link(linka);
                    var el = document.createElement('div');
                    el.innerHTML = result;
                    p.appendChild(el);
 
                 } else {
-                content = content + k + ": " + data.persons[i][k];
+                content = content + k + ": " + data[i][k];
                 var t = document.createTextNode(content);
                 p.appendChild(t);
                 var b = document.createElement("br");
@@ -507,7 +507,7 @@ function getInfo() {
             type: 'POST',
             data: JSON.stringify(dataAward),
             contentType: 'application/json',
-            url: 'http://localhost:8010/funfacts/test', 
+            url: './awards', 
             success: function(data) {
               if(data.length == 0) {
                 alert("no informaiton found");
@@ -515,24 +515,24 @@ function getInfo() {
                 for(var i = 0; i < data.length; i++) {
                   var p = document.createElement("P");
                   var content_name = "";
-                    content_name = "name: "+content_name + data[i][0] + " " + data[i][1] + "   ";
+                    content_name = "name: "+content_name + data[i][0] + " " ;
                     var t = document.createTextNode(content_name);
-                    p.appendChild(t);
-                    var b1 = document.createElement("br");
-                    p.appendChild(b1);
+                    // p.appendChild(t);
+                    // var b1 = document.createElement("br");
+                    // p.appendChild(b1);
                     var content_award = "";
-                    content_award = "award: "+content_award + data[i][2] + " " + data[i][3]+" "+ data[i][4] + " " + data[i][5] + " " + data[i][6];
+                    content_award = (i + 1) + ": "+content_award + data[i][1] + " " + data[i][2]+" "+ data[i][3] + " " + data[i][4] + " " + data[i][5];
                     var t2 = document.createTextNode(content_award);
                     p.appendChild(t2);
                     var b = document.createElement("br");
                     p.appendChild(b);
                   document.getElementById('sql').appendChild(p);
                 }
-
+                document.getElementById('show_award').style.display='block';
               }
             }
           });
-          document.getElementById('show_award').style.display='block';
+          // document.getElementById('show_award').style.display='block';
         }
       }
 

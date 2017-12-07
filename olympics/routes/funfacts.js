@@ -49,24 +49,28 @@ router.post('/info', function(req, res, next) {
 
 
 router.post('/awards', function(req,res,next) {
-	var name = req.body.name;
-	console.log("name: " + name);
-	var nameList = name.trim().split(" ");
-	var name1 = nameList[0] + " " + nameList[1] ;
-	var name2 = nameList[1] + " " + nameList[0]  ;
+	var firstName = req.body.firstNameAward;
+  var lastName = req.body.lastNameAward;
+  var name1 = firstName + " " + lastName;
+  var name2 = lastName + " " + firstName;
 
-	var sqlquery = "with T1 as (SELECT athlete_id " +
+  name1 = titleCase(name1);
+  name2 = titleCase(name2);
+
+	var sqlquery = "with T1 as (SELECT athlete_id as id, name " +
 					"FROM athlete " +
 					"where name = '"+ name1 +"' or name = '" + name2 + "'), " +
-					"T2 as (select year,medal,event " +
+					"T2 as (select athlete_id as id, year,medal,event " +
 					"from award a natural join event e " + 
-					"where a.athlete_id in (select * from T1)) " +
-					"select o.year,event,city,season,medal " +
-					"from T2 inner join olympics o on T2.year=o.year";
+					"where a.athlete_id in (select athlete_id from T1)), " +
+          "T3 as (select T2.id, o.year, event, city, season, medal " +
+          "from T2 inner join olympics o on T2.year=o.year) " +
+					"SELECT T1.name, T3.year, T3.event, T3.city, T3.season, T3.medal " +
+					"FROM T3 join T1 on T3.id = T1.id ";
 
 	console.log(sqlquery);
 
-  	sqlConnection(req,res,sqlquery);
+  sqlConnection(req,res,sqlquery);
 
 	
 
@@ -124,6 +128,14 @@ function doRelease(connection)
       }
     });
 }
+
+function titleCase(str) {
+    return str.toLowerCase()
+      .split(" ")
+      .map(function(v){return v.charAt(0).toUpperCase() + v.slice(1)})
+      .join(" ");
+}
+
 
 
 
