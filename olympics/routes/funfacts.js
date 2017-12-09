@@ -79,7 +79,7 @@ router.post('/awards', function(req,res,next) {
           "T3 as (select T2.id, o.year, event, city, season, medal " +
           "from T2 inner join olympics o on T2.year=o.year) " +
 					"SELECT T1.name, T3.year, T3.event, T3.city, T3.season, T3.medal " +
-					"FROM T3 join T1 on T3.id = T1.id ";
+					"FROM T3 join T1 on T3.id = T1.id order by T3.year";
 
 	console.log(sqlquery);
 
