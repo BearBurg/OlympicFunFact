@@ -11,13 +11,42 @@ body,h1 {font-family: "Raleway", Arial, sans-serif}
 h1 {letter-spacing: 6px}
 .w3-row-padding img {margin-bottom: 12px}
 </style>
+
+<head>
+  <script>
+    (function() {
+      var cx = '004243522907286865523:oanrcoqltlw';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      window.onload = function(){
+        document.getElementById('gsc-i-id1').placeholder = 'search olympic.org';
+      }
+
+    })();
+  </script>
+  <style>
+    .cse .gsc-search-button input.gsc-search-button-v2,
+    input.gsc-search-button-v2 {
+        height: 26px !important;
+        margin-top: 0 !important;
+        min-width: 13px !important;
+        padding: 5px 26px !important;
+        width: 68px !important;
+    }
+</style>
+</head>
+
 <body>
 
 <!-- !PAGE CONTENT! -->
 <div class="content" style="max-width:1500px">
 
 <!-- Header -->
-<header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+<header class="w3-panel w3-center w3-opacity" style="padding:30px 16px">
   <h1 class="w3-xlarge">Olympics</h1>
   <h1></h1>
   
@@ -28,9 +57,21 @@ h1 {letter-spacing: 6px}
       <a href="/funfacts" class="w3-bar-item w3-button w3-light-grey">anthlete info</a>
       <!-- <a href="#" class="w3-bar-item w3-button">Contact us</a> -->
       <button onclick = "Contact()" class="w3-bar-item w3-button">Contact us</a>
+
+
     </div>
+
+    
   </div>
 </header>
+
+<div body style="width:600px;margin-left:auto;margin-right:auto;">
+  <h1 class="w3-large">Google Search</h1>
+    <gcse:search></gcse:search>
+</div>
+
+
+
 
 <!-- Photo Grid -->
 <div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
