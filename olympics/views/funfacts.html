@@ -428,7 +428,7 @@ function getInfo() {
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
-            url: './info', 
+            url: './funfacts/info', 
             success: function(data) {
               // alert(data.persons[0].Name);
               // console.log(data.awards[0]);
@@ -507,7 +507,7 @@ function getInfo() {
             type: 'POST',
             data: JSON.stringify(dataAward),
             contentType: 'application/json',
-            url: './awards', 
+            url: './funfacts/awards', 
             success: function(data) {
               if(data.length == 0) {
                 alert("no informaiton found");

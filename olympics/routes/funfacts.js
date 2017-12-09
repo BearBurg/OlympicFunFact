@@ -31,19 +31,32 @@ router.post('/info', function(req, res, next) {
 	var name = req.body.name;
 	console.log("name: " + name);
 	var nameList = name.trim().split(" ");
-	console.log(nameList);
-	var name1 = nameList[0] ;
-	var name2 = nameList[1] ;
-	console.log("name1: "+name1);
-	console.log("name2: "+name2)
-	db.olympics_new.find({$and: [{ Name : {'$regex' : name1, '$options' : 'i'}}, { Name : {'$regex' : name2, '$options' : 'i'} } ]}, {"_id":0},function(err,person) {
-    if (err){
-     res.send(err);
-    }
-    console.log(person.length);
-    res.json(person);
+  if (nameList.length == 2) {
+    var name1 = nameList[0] ;
+    var name2 = nameList[1] ;
+    console.log("name1: "+name1);
+    console.log("name2: "+name2)
+    db.olympics_new.find({$and: [{ Name : {'$regex' : name1, '$options' : 'i'}}, { Name : {'$regex' : name2, '$options' : 'i'} } ]}, {"_id":0},function(err,person) {
+      if (err){
+       res.send(err);
+      }
+      console.log(person.length);
+      res.json(person);
 
    });
+
+  } else if (nameList.length == 1) {
+    var name1 = nameList[0] ;
+    db.olympics_new.find({ Name : {'$regex' : name1, '$options' : 'i'}}, {"_id":0},function(err,person) {
+      if (err){
+       res.send(err);
+      }
+      console.log(person.length);
+      res.json(person);
+
+   });
+  }
+	
 });
 
 
