@@ -226,7 +226,40 @@ var sqlConnection = function(req,res,sqlquery){
 			     	}
 				 });
 
-				res.json(toBeSent);
+				// console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~");
+				// console.log(result_data[0][0]);
+				// console.log(result_data[0][1]);
+
+				var rankData = {
+					"1":{
+						"country":result_data[0][0],
+						"medal":result_data[0][1]
+					},
+					"2":{
+						"country":result_data[1][0],
+						"medal":result_data[1][1]
+					},
+					"3":{
+						"country":result_data[2][0],
+						"medal":result_data[2][1]
+
+					},
+					"4":{
+						"country":result_data[3][0],
+						"medal":result_data[3][1]
+					},
+					"5":{
+						"country":result_data[4][0],
+						"medal":result_data[4][1]
+					},
+					"6":{
+						"country":result_data[5][0],
+						"medal":result_data[5][1]
+					}
+				};
+
+				res.json({toBeSent:toBeSent, rankData:rankData});
+
 
 		        console.log(result.metaData); // [ { name: 'DEPARTMENT_ID' }, { name: 'DEPARTMENT_NAME' } ]
 		        console.log(result.rows);     // [ [ 180, 'Construction' ] ]

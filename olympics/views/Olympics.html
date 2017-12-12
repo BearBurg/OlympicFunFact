@@ -1,10 +1,33 @@
 <!DOCTYPE html>
+<?php include 'header.php';?>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Olympics</title>
     <meta charset="utf-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
     <style type="text/css">
+
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
 
         h1 {
             font-size: 30px;
@@ -20,6 +43,11 @@
             font-size: 22px;
             color: #343434;
 
+        }
+        .twitter{
+            position: absolute;
+            right:10pt;
+            top:500pt;
         }
 
         .container {
@@ -41,6 +69,9 @@
         }
 
         .rightPanel {
+            position: absolute;;
+            right:50pt;
+            bottom: 60pt;
             float: right;
             width: 223px;
             border-radius: 5px;
@@ -53,6 +84,7 @@
         
         .mapael .mapTooltip {
             position: absolute;
+            right:50pt;
             background-color: #fff;
             moz-opacity: 0.80;
             opacity: 0.80;
@@ -66,8 +98,10 @@
         }
         
         .mapael .map {
-            height: 450px;
-            width: 79%;
+            position: absolute;
+            left:20pt;
+            height: 380px;
+            width: 70%;
             margin-right: 228px;
             overflow: hidden;
             position: relative;
@@ -119,13 +153,50 @@
         .block{
             position:absolute;
             top:410pt;
-            left:50pt;
+            left:40pt;
         }
-        .namefilter{
-            position: relative;
+        .world{
+
+        }
+        .firstnamefilter{
+            position:absolute;
+            left:20pt;
             display: inline-block;
             padding: 16px;
-            background-color: #01565E;
+            background-color: #ffd700;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .secondnamefilter{
+            position:absolute;
+            left:160pt;
+            display: inline-block;
+            padding: 16px;
+            background-color: #ffd700;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .thirdnamefilter{
+            position:absolute;
+            left:300pt;
+            display: inline-block;
+            padding: 16px;
+            background-color: #ffd700;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+         .forthnamefilter{
+            position:absolute;
+            left:600pt;
+            display: inline-block;
+            padding: 16px;
+            background-color: #ffd700;
             color: white;
             cursor: pointer;
             font-size: 16px;
@@ -563,7 +634,7 @@
 
         $(function () {
 
-            // Fake data for countries and cities from 2003 to 2013
+  // Fake data for countries and cities from 2003 to 2013
             mapdata = {
 
                 "2016":{
@@ -2021,7 +2092,7 @@
                                 min:1,
                                 max: 5,
                                 attrs: {
-                                    fill: "#6ECBD4"
+                                    fill: "#ffebcd"
                                 },
                                 label: "Less than 5"
                             },
@@ -2029,7 +2100,7 @@
                                 min: 5,
                                 max: 10,
                                 attrs: {
-                                    fill: "#3EC7D4"
+                                    fill: "#ffd700"
                                 },
                                 label: "Between 5 and 10"
                             },
@@ -2037,14 +2108,14 @@
                                 min: 10,
                                 max: 50,
                                 attrs: {
-                                    fill: "#028E9B"
+                                    fill: "#ffa500"
                                 },
                                 label: "Between 10 and 50"
                             },
                             {
                                 min: 50,
                                 attrs: {
-                                    fill: "#01565E"
+                                    fill: "#FF8C00"
                                 },
                                 label: "More than 50"
                             }
@@ -2052,38 +2123,9 @@
                     },
                     plot: {
                         display: true,
-                        title: "City population",
+                        title: "Host City",
                         marginBottom: 6,
                         slices: [
-                            {
-                                type: "circle",
-                                max: 500000,
-                                attrs: {
-                                    fill: "#FD4851",
-                                    "stroke-width": 1
-                                },
-                                attrsHover: {
-                                    transform: "s1.5",
-                                    "stroke-width": 1
-                                },
-                                label: "Less than 500 000",
-                                size: 10
-                            },
-                            {
-                                type: "circle",
-                                min: 500000,
-                                max: 1000000,
-                                attrs: {
-                                    fill: "#FD4851",
-                                    "stroke-width": 1
-                                },
-                                attrsHover: {
-                                    transform: "s1.5",
-                                    "stroke-width": 1
-                                },
-                                label: "Between 500 000 and 1M",
-                                size: 20
-                            },
                             {
                                 type: "circle",
                                 min: 1000000,
@@ -2095,7 +2137,7 @@
                                     transform: "s1.5",
                                     "stroke-width": 1
                                 },
-                                label: "More than 1M",
+                                label: "",
                                 size: 30
                             }
                         ]
@@ -2153,7 +2195,16 @@
                             //alert(JSON.stringify(data));
                             // alert(data.France);
                             // alert(data.SouthAfrica);
-                            // alert(yearData);
+                            // // alert(yearData);
+                            var ranks = data.rankData;
+                            data = data.toBeSent;
+
+                            alert(ranks['1']['country']);
+                            alert(ranks['1']['medal']);
+
+                            var tableData = "<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr><td>1</td><td>"+ranks['1']['country']+"</td><td>"+ranks['1']['medal']+"</td></tr><tr><td>2</td><td>"+ranks['2']['country']+"</td><td>"+ranks['2']['medal']+"</td></tr><tr><td>3</td><td>"+ranks['3']['country']+"</td><td>"+ranks['3']['medal']+"</td></tr><tr><td>4</td><td>"+ranks['4']['country']+"</td><td>"+ranks['4']['medal']+"</td></tr><tr><td>5</td><td>"+ranks['5']['country']+"</td><td>"+ranks['5']['medal']+"</td></tr><tr><td>6</td><td>"+ranks['6']['country']+"</td><td>"+ranks['6']['medal']+"</td></tr></table>";
+
+                            document.getElementById("rankTable").innerHTML = tableData;
 
                             city1 = positions[''+yearData+'']['city1']['name'];
                             //alert(city1);
@@ -3584,7 +3635,7 @@
                                                                         min:1,
                                                                         max: 5,
                                                                         attrs: {
-                                                                            fill: "#6ECBD4"
+                                                                            fill: "#ffebcd"
                                                                         },
                                                                         label: "Less than 5"
                                                                     },
@@ -3592,7 +3643,7 @@
                                                                         min: 5,
                                                                         max: 10,
                                                                         attrs: {
-                                                                            fill: "#3EC7D4"
+                                                                            fill: "#ffd700"
                                                                         },
                                                                         label: "Between 5 and 10"
                                                                     },
@@ -3600,53 +3651,24 @@
                                                                         min: 10,
                                                                         max: 50,
                                                                         attrs: {
-                                                                            fill: "#028E9B"
+                                                                            fill: "#ffa500"
                                                                         },
                                                                         label: "Between 10 and 50"
                                                                     },
                                                                     {
                                                                         min: 50,
                                                                         attrs: {
-                                                                            fill: "#01565E"
+                                                                            fill: "#FF8C00"
                                                                         },
                                                                         label: "More than 50"
                                                                     }
                                                                 ]
                                                             },
-                                                            plot: {
+                                                             plot: {
                                                                 display: true,
-                                                                title: "City population",
+                                                                title: "Host City",
                                                                 marginBottom: 6,
                                                                 slices: [
-                                                                    {
-                                                                        type: "circle",
-                                                                        max: 500000,
-                                                                        attrs: {
-                                                                            fill: "#FD4851",
-                                                                            "stroke-width": 1
-                                                                        },
-                                                                        attrsHover: {
-                                                                            transform: "s1.5",
-                                                                            "stroke-width": 1
-                                                                        },
-                                                                        label: "Less than 500 000",
-                                                                        size: 30
-                                                                    },
-                                                                    {
-                                                                        type: "circle",
-                                                                        min: 500000,
-                                                                        max: 1000000,
-                                                                        attrs: {
-                                                                            fill: "#FD4851",
-                                                                            "stroke-width": 1
-                                                                        },
-                                                                        attrsHover: {
-                                                                            transform: "s1.5",
-                                                                            "stroke-width": 1
-                                                                        },
-                                                                        label: "Between 500 000 and 1M",
-                                                                        size: 30
-                                                                    },
                                                                     {
                                                                         type: "circle",
                                                                         min: 1000000,
@@ -3658,7 +3680,7 @@
                                                                             transform: "s1.5",
                                                                             "stroke-width": 1
                                                                         },
-                                                                        label: "More than 1M",
+                                                                        label: "",
                                                                         size: 30
                                                                     }
                                                                 ]
@@ -3679,40 +3701,42 @@
 </head>
 
 <body>
-<div class="container">
 
-    <h1>Olympics World Map</a></h1>
-    <!-- <a href="" id="zoom-northamerica">North America</a> <a href="" id="zoom-southamerica">South America</a> <a href="" id="zoom-europe">Europe</a> <a href="" id="zoom-asia">Asia</a> <a href="" id="zoom-africa">Africa</a>  <a href="" id="zoom-oceania">Oceania</a>-->
+<div class="w3-display-container" style="margin-bottom:50px">
+
+  <img src="https://eventraveler.com/blog/wp-content/uploads/2016/08/London-Olympics-Opening.jpg" style="width:100%">
+
+
+  <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
+   style="bottom:10%;opacity:0.7;width:70%">
+
+  <h2><b>Olympics World Map<br>A map to show Olympics historical statics</b></h2>
+
+</div>
+</div>
+
+<div class="w3-display-container" style="margin-bottom:50px">
     <div class="world">
         <div class="rightPanel">
-            <h2>Select a year</h2>
-
+          <!--   <h2>Select a year</h2> -->
+<!-- 
             <div class="knobContainer">
                 <input class="knob" data-width="80" data-height="80" data-min="2003" data-max="2013" data-cursor=true
                        data-fgColor="#454545" data-thickness=.45 value="2009" data-bgColor="#c7e8ff"/>
-            </div>
+            </div> -->
             <div class="areaLegend"></div>
             <div class="plotLegend"></div>
         </div>
         <div class="map"></div>
         <div style="clear: both;"></div>
     </div>
-    <!-- <p style="text-align:center;">This dataviz is built on <a href="https://www.vincentbroute.fr/mapael/">Mapael</a> and
-        <a href="http://anthonyterrien.com/knob/">Knob</a>. This is an example with fake data. </p> -->
-</div>
 
-<!--  <div class="dropdown">
-  <button class="dropbtn">Country</button>
-  <div class="dropdown-content" style="left:0;">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
-  </div>
-</div> -->
 
-<div class = block>
 
-  <div class = namefilter>
+<!-- 
+    <div class = block> -->
+
+  <div class = "w3-button w3-ripple w3-yellow" style = "position:absolute; top:289pt; left:20pt">
 
   <span><label>Medal</label></span>
      <select name="filterByMedal" id = "filterByMedal"  onchange="getMedal()">
@@ -3737,7 +3761,7 @@
 
 
 
-  <div class = namefilter>
+  <div class = "w3-button w3-ripple w3-yellow" style = "position:absolute; top:289pt; left:170pt">
   <span><label>Year</label></span>
      <select name="filterByYear" id = "filterByYear"  onchange="getYear()">
                                                     <option  value = "0">All years</option>
@@ -3779,7 +3803,7 @@
      </select>
   </div>
 
-   <div class = namefilter>
+   <div class = "w3-button w3-ripple w3-yellow" style = "position:absolute; top:289pt; left:320pt">
   <span><label>Sports</label></span>
      <select name="filterBySport" id = "filterBySport"  onchange="getSport()">
                                                       <option value="empty">All sports</option>
@@ -3851,39 +3875,90 @@
     </select>
   </div>
 
-      <div class =namefilter>
+      <div class = "w3-button w3-ripple w3-yellow" style = "position:absolute; top:289pt; left:600pt">
          <button onclick="submitFunction()">Submit</button>
     </div>
-
-</div>
-
-
-<!-- <div class="dropdown">
-  <button class="dropbtn">Gender</button>
-  <div class="dropdown-content">
-    <a href="#">Male</a>
-    <a href="#">Female</a>
-  </div>
-</div>
-
-<div class="dropdown">
-<button onclick="myFunction()" class="dropbtn">Country</button>
-  <div id="myDropdown" class="dropdown-content">
-    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
-    <a href="#about">About</a>
-    <a href="#base">Base</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Contact</a>
-    <a href="#custom">Custom</a>
-    <a href="#support">Support</a>
-    <a href="#tools">Tools</a>
-  </div>
-</div>-->
-
-
-<!-- <div class =namefilter>
-<button onclick="submitFunction()">Submit</button>
+<!-- 
 </div> -->
+
+
+
+
+  <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
+   style="bottom:10%;opacity:0.7;width:70%">
+
+
+</div>
+</div>
+
+<p>   </p>
+
+<div class="w3-half w3-container">
+  <div class="w3-topbar w3-border-orange">
+    <h2>Top Ranks</h2>
+    <div class = "rankTable", id = "rankTable">
+
+    </div>
+    <table>
+          <tr>
+            <th>Rank</th>
+            <th>Country</th>
+            <th>Medal</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>UnitedStates</td>
+            <td>2804</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Russia</td>
+            <td>1746</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Germany</td>
+            <td>1723</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>GreatBritain</td>
+            <td>875</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>France</td>
+            <td>825</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Italy</td>
+            <td>691</td>
+          </tr>
+        </table>
+    </div>
+</div>
+</div>
+
+<div class="w3-half w3-container" style = "color: #6ECBD4">
+  <div class="w3-topbar w3-border-amber" style = "color: #6ECBD4">
+    <h2>Twitter Feed</h2>
+     <a class="twitter-timeline"  href="https://twitter.com/hashtag/Olympics" data-widget-id="940394928101888000">#Olympics Tweets</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+</div>
+</div>
+
+<!-- <div class="w3-row w3-container" style="margin:50px 0">
+<div class="w3-half w3-container">
+  <div class="w3-topbar w3-border-orange">
+    <img src="/w3images/truck.jpg" style="width:100%">
+    <h2>Car Rental Included</h2>
+    <p>Wherever you travel our car rental is included.</p>
+  </div>
+</div> -->
+
+
 
 </body>
 </html>
