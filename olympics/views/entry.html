@@ -6,18 +6,54 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <style>
 body,h1 {font-family: "Raleway", Arial, sans-serif}
 h1 {letter-spacing: 6px}
 .w3-row-padding img {margin-bottom: 12px}
 </style>
+
+<head>
+  <script>
+    (function() {
+      var cx = '004243522907286865523:oanrcoqltlw';
+      var gcse = document.createElement('script');
+      gcse.type = 'text/javascript';
+      gcse.async = true;
+      gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(gcse, s);
+      window.onload = function(){
+        document.getElementById('gsc-i-id1').placeholder = 'search olympic.org';
+      }
+
+    })();
+  </script>
+  <style>
+    .cse .gsc-search-button input.gsc-search-button-v2,
+    input.gsc-search-button-v2 {
+        height: 26px !important;
+        margin-top: 0 !important;
+        min-width: 13px !important;
+        padding: 5px 26px !important;
+        width: 68px !important;
+    }
+</style>
+</head>
+
 <body>
 
 <!-- !PAGE CONTENT! -->
 <div class="content" style="max-width:1500px">
 
 <!-- Header -->
-<header class="w3-panel w3-center w3-opacity" style="padding:128px 16px">
+<header class="w3-panel w3-center w3-opacity" style="padding:30px 16px">
   <h1 class="w3-xlarge">Olympics</h1>
   <h1></h1>
   
@@ -28,9 +64,19 @@ h1 {letter-spacing: 6px}
       <a href="/funfacts" class="w3-bar-item w3-button w3-light-grey">anthlete info</a>
       <!-- <a href="#" class="w3-bar-item w3-button">Contact us</a> -->
       <button onclick = "Contact()" class="w3-bar-item w3-button">Contact us</a>
+
+
     </div>
+
+    
   </div>
 </header>
+
+<div body style="width:600px;margin-left:auto;margin-right:auto;">
+  <h1 class="w3-large">Google Search</h1>
+    <gcse:search></gcse:search>
+</div>
+ <div class="fb-share-button" data-href="http://ec2-52-15-157-140.us-east-2.compute.amazonaws.com:8000" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-52-15-157-140.us-east-2.compute.amazonaws.com%3A8000%2F&amp;src=sdkpreparse">share</a></div>
 
 <!-- Photo Grid -->
 <div class="w3-row-padding w3-grayscale" style="margin-bottom:128px">
