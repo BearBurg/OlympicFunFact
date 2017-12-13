@@ -43,17 +43,17 @@ router.post('/', function(req, res, next) {
 
 	      //year medal sports 
 			if (year != 0 && !(medal === 'empty') && !(sports === 'empty')) {
-				var sqlquery =  "WITH S AS ( " +
+				var sqlquery =  "WITH SE AS ( " +
 		                    "SELECT EVENT_ID " +
 		                    "FROM EVENT " +
 		                    "WHERE SPORT = '" + sports + "'), " +
-		                    "T AS ( " +
-		                    "SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
-		                    "FROM AWARD A " +
-		                    "WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.MEDAL = '" + medal + "' AND A.YEAR = '" + year + "' " +
-		                    "GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR)," +
+		                    "SA AS ( " +
+		                    "SELECT A1.YEAR, A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL " +
+		                    "FROM ATHLETE A2 JOIN AWARD A1 ON A2.ATHLETE_ID = A1.ATHLETE_ID " +
+		                    "WHERE A1.EVENT_ID IN (SELECT EVENT_ID FROM SE) AND A1.MEDAL = '" + medal + "' AND A1.YEAR = '" + year + "' " +
+		                    "GROUP BY A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL, A1.YEAR)," +
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
-		                    "FROM T " +
+		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
 		                    "SELECT C.NATION_C, F.TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
@@ -63,17 +63,17 @@ router.post('/', function(req, res, next) {
 		  } 
 		  //medal sports
 		  else if (year == 0 && !(medal === 'empty') && !(sports === 'empty')) {
-		    var sqlquery =  "WITH S AS ( " +
+		    var sqlquery =  "WITH SE AS ( " +
 		                    "SELECT EVENT_ID " +
 		                    "FROM EVENT " +
 		                    "WHERE SPORT = '" + sports + "'), " +
-		                    "T AS ( " +
-		                    "SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
-		                    "FROM AWARD A " +
-		                    "WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.MEDAL = '" + medal + "' " +
-		                    "GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR)," +
+		                    "SA AS ( " +
+		                    "SELECT A1.YEAR, A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL " +
+		                    "FROM ATHLETE A2 JOIN AWARD A1 ON A2.ATHLETE_ID = A1.ATHLETE_ID " +
+		                    "WHERE A1.EVENT_ID IN (SELECT EVENT_ID FROM SE) AND A1.MEDAL = '" + medal + "' " +
+		                    "GROUP BY A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL, A1.YEAR)," +
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
-		                    "FROM T " +
+		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
 		                    "SELECT C.NATION_C, F.TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
@@ -83,17 +83,17 @@ router.post('/', function(req, res, next) {
 		  } 
 		  //sports
 		  else if (year == 0 && medal === 'empty' && !(sports === 'empty')) {
-		    var sqlquery =  "WITH S AS ( " +
+		    var sqlquery =  "WITH SE AS ( " +
 		                    "SELECT EVENT_ID " +
 		                    "FROM EVENT " +
 		                    "WHERE SPORT = '" + sports + "'), " +
-		                    "T AS ( " +
-		                    "SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
-		                    "FROM AWARD A " +
-		                    "WHERE A.EVENT_ID IN (SELECT * FROM S) " +
-		                    "GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR)," +
+		                    "SA AS ( " +
+		                    "SELECT A1.YEAR, A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL " +
+		                    "FROM ATHLETE A2 JOIN AWARD A1 ON A2.ATHLETE_ID = A1.ATHLETE_ID " +
+		                    "WHERE A1.EVENT_ID IN (SELECT EVENT_ID FROM SE) " +
+		                    "GROUP BY A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL, A1.YEAR)," +
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
-		                    "FROM T " +
+		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
 		                    "SELECT C.NATION_C, F.TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
@@ -110,7 +110,7 @@ router.post('/', function(req, res, next) {
 		                    "GROUP BY P.NOC), " +
 		                    "Summation2 AS ( " +
 		                    "SELECT C.Nation_C, Summation.SUM AS SUM1 " +
-		                    "FROM Summation NATURAL JOIN COUNTRY C) " +
+		                    "FROM COUNTRY C NATURAL JOIN Summation) " +
 		                    "SELECT Nation_C, SUM(SUM1) AS TOTAL_MEDAL " +
 		                    "FROM Summation2 " +
 		                    "GROUP BY Nation_C " +
@@ -128,7 +128,7 @@ router.post('/', function(req, res, next) {
 		                    "GROUP BY P.NOC), " +
 		                    "Summation2 AS ( " +
 		                    "SELECT C.Nation_C, Summation.SUM AS SUM1 " +
-		                    "FROM Summation NATURAL JOIN COUNTRY C) " +
+		                    "FROM COUNTRY C NATURAL JOIN Summation) " +
 		                    "SELECT Nation_C, SUM(SUM1) AS TOTAL_MEDAL " +
 		                    "FROM Summation2 " +
 		                    "GROUP BY Nation_C " +
@@ -142,7 +142,7 @@ router.post('/', function(req, res, next) {
 		                    "FROM PARTICIPATE P JOIN COUNTRY C ON P.NOC = C.NOC " +
 		                    "WHERE P.YEAR = '" + year + "' " + ") " +
 		                    "SELECT C.Nation_C, SUM(P1.SUM1) AS TOTAL " +
-		                    "FROM PREP P1 NATURAL JOIN COUNTRY C " +
+		                    "FROM COUNTRY C NATURAL JOIN PREP P1 " +
 		                    "GROUP BY Nation_C " +
 		                    "ORDER BY TOTAL DESC ";
 		    console.log(sqlquery);
@@ -150,17 +150,17 @@ router.post('/', function(req, res, next) {
 		  }
 		  //year sports
 		  else if (year != 0 && medal === 'empty' && !(sports === 'empty')){
-		    var sqlquery =  "WITH S AS ( " +
+		    var sqlquery =  "WITH SE AS ( " +
 		                    "SELECT EVENT_ID " +
 		                    "FROM EVENT " +
 		                    "WHERE SPORT = '" + sports + "'), " +
-		                    "T AS ( " +
-		                    "SELECT YEAR, A.NATIONALITY, A.EVENT_ID, A.MEDAL " +
-		                    "FROM AWARD A " +
-		                    "WHERE A.EVENT_ID IN (SELECT * FROM S) AND A.YEAR = '" + year + "' " +
-		                    "GROUP BY A.NATIONALITY, A.EVENT_ID, A.MEDAL, A.YEAR)," +
+		                    "SA AS ( " +
+		                    "SELECT A1.YEAR, A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL " +
+		                    "FROM ATHLETE A2 JOIN AWARD A1 ON A2.ATHLETE_ID = A1.ATHLETE_ID " +
+		                    "WHERE A1.EVENT_ID IN (SELECT * FROM S) AND A1.YEAR = '" + year + "' " +
+		                    "GROUP BY A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL, A1.YEAR)," +
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
-		                    "FROM T " +
+		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
 		                    "SELECT C.NATION_C, F.TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
@@ -174,7 +174,7 @@ router.post('/', function(req, res, next) {
 		                    "FROM PARTICIPATE P JOIN COUNTRY C ON P.NOC = C.NOC " +
 		                    "WHERE P.YEAR = '" + year + "' " + ") " +
 		                    "SELECT C.Nation_C, SUM(P1.SUM1) AS TOTAL " +
-		                    "FROM PREP P1 NATURAL JOIN COUNTRY C " +
+		                    "FROM COUNTRY C NATURAL JOIN PREP P1 " +
 		                    "GROUP BY Nation_C " +
 		                    "ORDER BY TOTAL DESC ";
 		    console.log(sqlquery);
