@@ -65,7 +65,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 
   <!-- Image header -->
   <div class="w3-display-container w3-container">
-    <img src="/images/1.jpg" alt="ceremony" style="width:100%">
+    <img src="https://media.giphy.com/media/5Irg8v2e8GxgI/giphy.gif" style="width:100%">
+    <!-- <img src="/images/1.jpg" alt="ceremony" style="width:100%"> -->
     <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
       <h1 class="w3-jumbo w3-hide-small">Welcome</h1>
       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
@@ -108,8 +109,8 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
+          <<!-- img src="https://media.giphy.com/media/LGYU2Ix0b360g/giphy.gif" style="width:100%"> -->
           <img src="/images/Michael_Phelps.jpg" style="width:100%">
-          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
           <div class="w3-display-middle w3-display-hover">
             <button onclick = "getM()" class="w3-button w3-black">Get Info<i ></i></button>
           </div>
@@ -120,7 +121,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="/images/Nadia_Com.jpg" style="width:100%">
-          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
           <div class="w3-display-middle w3-display-hover">
             <button onclick = "getN()" class="w3-button w3-black">Get Info<i ></i></button>
           </div>
@@ -134,7 +134,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="/images/reiner-klimke.jpg" style="width:100%">
-          <!-- <span class="w3-tag w3-display-topleft">New</span> -->
           <div class="w3-display-middle w3-display-hover">
             <button onclick = "getR()" class="w3-button w3-black">Get Info<i ></i></button>
           </div>
@@ -157,7 +156,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="/images/Usain_Bolt.jpg" style="width:100%">
-          <!-- <span class="w3-tag w3-display-topleft">Sale</span> -->
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black" onclick = "getU()">Get Info <i></i></button>
           </div>
@@ -167,7 +165,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
       <div class="w3-container">
         <div class="w3-display-container">
           <img src="/images/VALENTINA _VEZZALI.jpg" style="width:100%">
-          <!-- <span class="w3-tag w3-display-topleft">Sale</span> -->
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black" onclick = "getV()">Get Info <i></i></button>
           </div>
@@ -210,7 +207,6 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-modal-content w3-animate-zoom">
     <div class="w3-container w3-black w3-display-container">
       <span onclick="mute()" class="w3-button w3-display-topright w3-large">x</span>
-      <!-- <span onclick="document.getElementById('menu').style.display='none'" class="w3-button w3-display-topright w3-large">x</span> -->
       <h1>Athlete Info</h1>
     </div>
     <div id = "mongod" class="w3-container">
@@ -427,27 +423,21 @@ function w3_close() {
 function getInfo() {
         if(name === "") {
             alert("please enter an athlete name");
-        } else {
-            // alert(name);
-        
+        } else {        
         var data = {};
         data.name = name;
-        // var info;
         $.ajax({
             type: 'POST',
             data: JSON.stringify(data),
             contentType: 'application/json',
             url: './funfacts/info', 
             success: function(data) {
-              // alert(data.persons[0].Name);
-              // console.log(data.awards[0]);
               if(data.length > 0) {
               for(var i = 0; i < data.length; i++) {
                 var p = document.createElement("P");
                 for (var k in data[i]) {
                   var content = "";
                   if (k ==="link"){
-                  // content = content + k + ": " + data[i][k].link(data[i][k]);
                   var linka = data[i][k];
                   var result = linka.link(linka);
                    var el = document.createElement('div');
@@ -462,28 +452,6 @@ function getInfo() {
                 p.appendChild(b);
               }
               } 
-          //     var btn = document.createElement("BUTTON");
-          //     var t = document.createTextNode("get award info");       // Create a text node
-          //     btn.appendChild(t); 
-          //     p.appendChild(btn);
-          //    var athlete_name = data.persons[i].Name;
-          //     btn.onclick = function(){
-               
-          //       alert(athlete_name);
-          //       var award = {};
-          //       award.name = athlete_name;
-          //       $.ajax({
-          //           type: 'POST',
-          //           data: JSON.stringify(award),
-          //           contentType: 'application/json',
-          //           url: 'http://localhost:8010/funfacts/test', 
-          //           success: function(data) {
-          //             alert(data[0]);
-
-          //   }
-          // });
-
-          //     }
               document.getElementById('mongod').appendChild(p);
               }                                
             } else {
@@ -502,16 +470,12 @@ function getInfo() {
       }
 
       function getInfoAward() {
-        // alert(lastNameAward);
-        // alert(firstNameAward);
         if(lastNameAward === "" || firstNameAward === "") {
             alert("please enter an athlete name");
         } else {
           var dataAward = {};
           dataAward.firstNameAward = firstNameAward;
           dataAward.lastNameAward = lastNameAward;
-          // alert(firstNameAward);
-          // alert(lastNameAward);
           $.ajax({
             type: 'POST',
             data: JSON.stringify(dataAward),
@@ -526,9 +490,6 @@ function getInfo() {
                   var content_name = "";
                     content_name = "name: "+content_name + data[i][0] + " " ;
                     var t = document.createTextNode(content_name);
-                    // p.appendChild(t);
-                    // var b1 = document.createElement("br");
-                    // p.appendChild(b1);
                     var content_award = "";
                     content_award = (i + 1) + ": "+content_award + data[i][1] + " " + data[i][2]+" "+ data[i][3] + " " + data[i][4] + " " + data[i][5];
                     var t2 = document.createTextNode(content_award);
