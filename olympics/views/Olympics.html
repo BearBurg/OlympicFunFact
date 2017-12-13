@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <?php include 'header.php';?>
 <html>
+
+<!-- Sidebar/menu -->
+
+
+
 <head>
     <meta charset="utf-8">
     <title>Olympics</title>
@@ -11,6 +16,29 @@
 
 
     <style type="text/css">
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #111;
+        }
 
 
         table {
@@ -269,6 +297,13 @@
     var sportData = "empty";
 
     var data = {};
+
+    function w3_open() {
+            document.getElementById("mySidebar").style.display = "block";
+        }
+        function w3_close() {
+            document.getElementById("mySidebar").style.display = "none";
+        }
 
 
     var positions = {
@@ -635,6 +670,20 @@
 
 
         $(function () {
+                var myIndex = 0;
+                    carousel();
+
+                    function carousel() {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < x.length; i++) {
+                           x[i].style.display = "none";  
+                        }
+                        myIndex++;
+                        if (myIndex > x.length) {myIndex = 1}    
+                        x[myIndex-1].style.display = "block";  
+                        setTimeout(carousel, 2500); // Change image every 2 seconds
+                    }
 
   // Fake data for countries and cities from 2003 to 2013
                 data.medalData = "empty";
@@ -3793,9 +3842,27 @@
 
 <body>
 
+    <ul>
+     <!--  <li><a class="active" href="#home">Home</a></li> -->
+      <li><a href="/">Home</a></li>
+      <li><a href="/funfacts">Athlete Page</a></li>
+    </ul>
+
+
 <div class="w3-display-container" style="margin-bottom:50px">
 
-  <img src="https://media.giphy.com/media/ZDqVE2WwBH6Pm/giphy.gif" style="width:100%">
+    <div class="w3-content w3-section" style="max-width:1500px">
+       
+          <img class="mySlides" src="https://cdn1.thr.com/sites/default/files/2013/08/Olympics_a_l.jpg" style="width:100%">
+             <img class="mySlides" src="https://i.pinimg.com/originals/cd/41/87/cd4187b2edbaaf256cbe76575e38375f.jpg" style="width:100%">
+          <img class="mySlides" src="https://stillmed.olympic.org/media/Images/OlympicOrg/News/2016/08/19/2016-08-19-Synchronised-Swimming-thumbnail.jpg" style="width:100%">
+            <img class="mySlides" src="http://workitout100.com/wp-content/uploads/2016/08/team-work.jpg" style="width:100%">
+            <img class="mySlides" src="https://3113bd565d2f8d649361-a9ae00dd0e64385bd82d92fba68e6c40.ssl.cf3.rackcdn.com/images/2014/10/Team_USA_London_2012.jpg" style="width:100%">
+            
+          
+        </div>
+
+<!--   <img src="https://media.giphy.com/media/ZDqVE2WwBH6Pm/giphy.gif" style="width:100%"> -->
 
 
   <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
