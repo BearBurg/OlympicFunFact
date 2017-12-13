@@ -157,7 +157,7 @@ router.post('/', function(req, res, next) {
 		                    "SA AS ( " +
 		                    "SELECT A1.YEAR, A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL " +
 		                    "FROM ATHLETE A2 JOIN AWARD A1 ON A2.ATHLETE_ID = A1.ATHLETE_ID " +
-		                    "WHERE A1.EVENT_ID IN (SELECT * FROM S) AND A1.YEAR = '" + year + "' " +
+		                    "WHERE A1.EVENT_ID IN (SELECT EVENT_ID FROM SE) AND A1.YEAR = '" + year + "' " +
 		                    "GROUP BY A2.NATIONALITY, A1.EVENT_ID, A1.MEDAL, A1.YEAR)," +
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
 		                    "FROM SA " +
