@@ -20,6 +20,14 @@
 body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
 </style>
 <body class="w3-content" style="max-width:1200px">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">
@@ -30,6 +38,7 @@ body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}
   <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">
      <li><a href="/">back to entry</a></li>
     <li><a href="/map">map</a></li>
+    <div class="fb-share-button" data-href="http://ec2-52-15-157-140.us-east-2.compute.amazonaws.com:8000/funfacts" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fec2-52-15-157-140.us-east-2.compute.amazonaws.com%3A8000%2Ffunfacts&amp;src=sdkpreparse">Share</a></div>
 </nav>
 
 <!-- Top menu on small screens -->
