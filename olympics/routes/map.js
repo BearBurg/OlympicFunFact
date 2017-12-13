@@ -55,8 +55,9 @@ router.post('/', function(req, res, next) {
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
 		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
-		                    "SELECT C.NATION_C, F.TOTAL " +
+		                    "SELECT C.NATION_C, SUM(F.TOTAL) AS TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
+				    "GROUP BY Nation_C " +
 		                    "ORDER BY TOTAL DESC ";
 		    console.log(sqlquery);
 			  sqlConnection(req,res,sqlquery);
@@ -75,8 +76,9 @@ router.post('/', function(req, res, next) {
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
 		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
-		                    "SELECT C.NATION_C, F.TOTAL " +
+		                    "SELECT C.NATION_C, SUM(F.TOTAL) AS TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
+				    "GROUP BY Nation_C " +
 		                    "ORDER BY TOTAL DESC ";
 		    console.log(sqlquery);
 		    sqlConnection(req,res,sqlquery);
@@ -95,9 +97,10 @@ router.post('/', function(req, res, next) {
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
 		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
-		                    "SELECT C.NATION_C, F.TOTAL " +
+				    "SELECT C.NATION_C, SUM(F.TOTAL) AS TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
-		                    "ORDER BY TOTAL DESC ";
+				    "GROUP BY Nation_C " +
+		                    "ORDER BY TOTAL DESC ";            
 		    console.log(sqlquery);
 		    sqlConnection(req,res,sqlquery);
 
@@ -162,8 +165,9 @@ router.post('/', function(req, res, next) {
 		                    "FINAL AS (SELECT Nationality, COUNT(MEDAL) AS TOTAL " +
 		                    "FROM SA " +
 		                    "GROUP BY NATIONALITY) " +
-		                    "SELECT C.NATION_C, F.TOTAL " +
+		                    "SELECT C.NATION_C, SUM(F.TOTAL) AS TOTAL " +
 		                    "FROM FINAL F JOIN COUNTRY C ON F.NATIONALITY = C.NATION " +
+				    "GROUP BY Nation_C " +
 		                    "ORDER BY TOTAL DESC ";
 		    console.log(sqlquery);
 		    sqlConnection(req,res,sqlquery);
