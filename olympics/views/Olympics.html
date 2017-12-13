@@ -268,6 +268,8 @@
     var yearData = 0;
     var sportData = "empty";
 
+    var data = {};
+
 
     var positions = {
         "0":{
@@ -635,6 +637,67 @@
         $(function () {
 
   // Fake data for countries and cities from 2003 to 2013
+                data.medalData = "empty";
+                data.genderData = "empty";
+                data.yearData = "0";
+                data.sportData = "empty"; 
+
+             $.ajax({
+                        type: 'POST',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        url: './map',                      
+                        success: function(data) {
+                            console.log("success");
+                            //alert(JSON.stringify(data));
+                            // alert(data.France);
+                            // alert(data.SouthAfrica);
+                            // // alert(yearData);
+                            var ranks = data.rankData;
+                            data = data.toBeSent;
+
+                            // alert("length of json~~~~~"+ranks.length);
+
+                            console.log("lllllllllllllllll");
+                            console.log(JSON.stringify(ranks));
+
+                            // alert(ranks['1']['country']);
+                            // alert(ranks['1']['medal']);
+
+                            var tableData ="<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr>";
+
+
+                            for (var index = 0; index < 14; index++){
+                                console.log("................contry json is ");
+                                // console.log(ranks[index+1]['country']);
+
+                                if (ranks[index]!== undefined){
+                                    var r = index+1;
+                                    tableData += "<td>"+r+"</td><td>"+ranks[index]['country']+"</td><td>"+ranks[index]['medal']+"</td></tr><tr>";
+                                } else{
+                                    tableData += "";
+                                }
+                            }
+
+                            tableData += "</table>";
+
+                            // var testData = "aaa";
+                            // testData += "bbb";
+        
+
+                             console.log(tableData);
+
+                            // var tableData = "<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr><td>1</td><td>"+ranks['1']['country']+"</td><td>"+ranks['1']['medal']+"</td></tr><tr><td>2</td><td>"+ranks['2']['country']+"</td><td>"+ranks['2']['medal']+"</td></tr><tr><td>3</td><td>"+ranks['3']['country']+"</td><td>"+ranks['3']['medal']+"</td></tr><tr><td>4</td><td>"+ranks['4']['country']+"</td><td>"+ranks['4']['medal']+"</td></tr><tr><td>5</td><td>"+ranks['5']['country']+"</td><td>"+ranks['5']['medal']+"</td></tr><tr><td>6</td><td>"+ranks['6']['country']+"</td><td>"+ranks['6']['medal']+"</td></tr></table>";
+
+                            document.getElementById("rankTable").innerHTML = tableData;
+                            }   
+
+                          });
+
+
+
+
+
             mapdata = {
 
                 "2016":{
@@ -2177,7 +2240,7 @@
             // } else{
             //     alert("now submitting the data!");
 
-                var data = {};
+                // var data = {};
                 data.medalData = medalData;
                 data.genderData = genderData;
                 data.yearData = yearData;
@@ -2199,10 +2262,38 @@
                             var ranks = data.rankData;
                             data = data.toBeSent;
 
-                            alert(ranks['1']['country']);
-                            alert(ranks['1']['medal']);
+                            // alert("length of json~~~~~"+ranks.length);
 
-                            var tableData = "<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr><td>1</td><td>"+ranks['1']['country']+"</td><td>"+ranks['1']['medal']+"</td></tr><tr><td>2</td><td>"+ranks['2']['country']+"</td><td>"+ranks['2']['medal']+"</td></tr><tr><td>3</td><td>"+ranks['3']['country']+"</td><td>"+ranks['3']['medal']+"</td></tr><tr><td>4</td><td>"+ranks['4']['country']+"</td><td>"+ranks['4']['medal']+"</td></tr><tr><td>5</td><td>"+ranks['5']['country']+"</td><td>"+ranks['5']['medal']+"</td></tr><tr><td>6</td><td>"+ranks['6']['country']+"</td><td>"+ranks['6']['medal']+"</td></tr></table>";
+                            console.log("lllllllllllllllll");
+                            console.log(JSON.stringify(ranks));
+
+                            // alert(ranks['1']['country']);
+                            // alert(ranks['1']['medal']);
+
+                            var tableData ="<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr>";
+
+
+                            for (var index = 0; index < 14; index++){
+                                console.log("................contry json is ");
+                                // console.log(ranks[index+1]['country']);
+
+                                if (ranks[index]!== undefined){
+                                    var r = index+1;
+                                    tableData += "<td>"+r+"</td><td>"+ranks[index]['country']+"</td><td>"+ranks[index]['medal']+"</td></tr><tr>";
+                                } else{
+                                    tableData += "";
+                                }
+                            }
+
+                            tableData += "</table>";
+
+                            // var testData = "aaa";
+                            // testData += "bbb";
+        
+
+                             console.log(tableData);
+
+                            // var tableData = "<table> <tr><th>Rank</th><th>Country</th><th>Medal</th></tr><tr><td>1</td><td>"+ranks['1']['country']+"</td><td>"+ranks['1']['medal']+"</td></tr><tr><td>2</td><td>"+ranks['2']['country']+"</td><td>"+ranks['2']['medal']+"</td></tr><tr><td>3</td><td>"+ranks['3']['country']+"</td><td>"+ranks['3']['medal']+"</td></tr><tr><td>4</td><td>"+ranks['4']['country']+"</td><td>"+ranks['4']['medal']+"</td></tr><tr><td>5</td><td>"+ranks['5']['country']+"</td><td>"+ranks['5']['medal']+"</td></tr><tr><td>6</td><td>"+ranks['6']['country']+"</td><td>"+ranks['6']['medal']+"</td></tr></table>";
 
                             document.getElementById("rankTable").innerHTML = tableData;
 
@@ -3704,7 +3795,7 @@
 
 <div class="w3-display-container" style="margin-bottom:50px">
 
-  <img src="https://eventraveler.com/blog/wp-content/uploads/2016/08/London-Olympics-Opening.jpg" style="width:100%">
+  <img src="https://media.giphy.com/media/ZDqVE2WwBH6Pm/giphy.gif" style="width:100%">
 
 
   <div class="w3-display-bottomleft w3-container w3-amber w3-hover-orange w3-hide-small"
@@ -3899,7 +3990,7 @@
     <div class = "rankTable", id = "rankTable">
 
     </div>
-    <table>
+  <!--   <table>
           <tr>
             <th>Rank</th>
             <th>Country</th>
@@ -3936,7 +4027,7 @@
             <td>691</td>
           </tr>
         </table>
-    </div>
+    </div> -->
 </div>
 </div>
 
