@@ -73,11 +73,11 @@ router.post('/awards', function(req,res,next) {
 	var sqlquery = "with T1 as (SELECT athlete_id as id, name " +
 					"FROM athlete " +
 					"where name = '"+ name1 +"' or name = '" + name2 + "'), " +
-					"T2 as (select athlete_id as id, year,medal,event " +
+					"T2 as (select athlete_id as id, year,medal,event, season " +
 					"from award a natural join event e " + 
 					"where a.athlete_id in (select athlete_id from T1)), " +
-          "T3 as (select T2.id, o.year, event, city, season, medal " +
-          "from T2 inner join olympics o on T2.year=o.year) " +
+          "T3 as (select T2.id, o.year, event, city, T2.season, medal " +
+          "from T2 inner join olympics o on T2.year=o.year and T2.season = o.season) " +
 					"SELECT T1.name, T3.year, T3.event, T3.city, T3.season, T3.medal " +
 					"FROM T3 join T1 on T3.id = T1.id order by T3.year";
 
