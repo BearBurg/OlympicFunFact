@@ -438,7 +438,7 @@
             "city1":{
                 "name":"Squaw Valley",
                 "Latitude": 39.196,
-                "Longitude":120.235
+                "Longitude":-120.235
             },
             "city2":{
                 "name":"Rome",
@@ -467,7 +467,7 @@
              "city2":{
                 "name":"Mexico City",
                 "Latitude": 19.26,
-                "Longitude":19.26
+                "Longitude":-99.8
             }
         },
 
@@ -617,7 +617,7 @@
             "city1":{
                 "name":"Vancouver",
                 "Latitude": 49.15,
-                "Longitude":123.6
+                "Longitude":-123.6
             }
         },
 
@@ -665,7 +665,15 @@
                     "text":{
                         "content":"test"
                     }
-                }
+                },
+                 "city2":{
+                    "latitude": 5900,
+                    "longitude":6666,
+                    "text":{
+                        "content":"test"
+                    }
+                },
+
             };
 
 
@@ -2352,16 +2360,36 @@
                             latitude1 = positions[''+yearData+'']['city1']['Latitude'];
                             longitude1 = positions[''+yearData+'']['city1']['Longitude'];
 
+                            city2 = positions[''+yearData+'']['city2']['name'];
+                            //alert(city1);
+
+                            latitude2 = positions[''+yearData+'']['city2']['Latitude'];
+                            longitude2 = positions[''+yearData+'']['city2']['Longitude'];
 
 
                             // alert(JSON.stringify(plots));
 
-                             Object.keys(plots).forEach(function(key) {
-                                plots[key]['latitude'] = latitude1;
-                                plots[key]['longitude'] = longitude1;
-                                plots[key]['text']['content'] = city1;
-                                key = city1;
-                             });
+                             // Object.keys(plots).forEach(function(key) {
+
+                             //    plots[key]['latitude'] = latitude1;
+                             //    plots[key]['longitude'] = longitude1;
+                             //    plots[key]['text']['content'] = city1;
+                             //    key = city1;
+
+                             // });
+
+                                plots['city1']['latitude'] = latitude1;
+                                plots['city1']['longitude'] = longitude1;
+                                plots['city1']['text']['content'] = city1;
+
+
+                                plots['city2']['latitude'] = latitude2;
+                                plots['city2']['longitude'] = longitude2;
+                                plots['city2']['text']['content'] = city2;
+
+
+                                // key = city1;
+
 
                             // alert(JSON.stringify(plots));
 

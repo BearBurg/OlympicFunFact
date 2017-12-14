@@ -35,6 +35,7 @@ router.post('/', function(req, res, next) {
 		 medal = req.body.medalData;
 	     sports = req.body.sportData;
 	     gender = req.body.genderData;
+	     
 	     console.log("sports " + sports);
 	     console.log("year" + year);
 	     console.log("medal" + medal);
