@@ -2360,11 +2360,15 @@
                             latitude1 = positions[''+yearData+'']['city1']['Latitude'];
                             longitude1 = positions[''+yearData+'']['city1']['Longitude'];
 
-                            city2 = positions[''+yearData+'']['city2']['name'];
+                            if (positions[''+yearData+'']['city2'] !== undefined){
+                                  city2 = positions[''+yearData+'']['city2']['name'];
                             //alert(city1);
 
-                            latitude2 = positions[''+yearData+'']['city2']['Latitude'];
-                            longitude2 = positions[''+yearData+'']['city2']['Longitude'];
+                                latitude2 = positions[''+yearData+'']['city2']['Latitude'];
+                                longitude2 = positions[''+yearData+'']['city2']['Longitude'];
+
+                            }
+
 
 
                             // alert(JSON.stringify(plots));
@@ -2382,10 +2386,15 @@
                                 plots['city1']['longitude'] = longitude1;
                                 plots['city1']['text']['content'] = city1;
 
-
-                                plots['city2']['latitude'] = latitude2;
-                                plots['city2']['longitude'] = longitude2;
-                                plots['city2']['text']['content'] = city2;
+                                if (positions[''+yearData+'']['city2'] !== undefined){
+                                            plots['city2']['latitude'] = latitude2;
+                                            plots['city2']['longitude'] = longitude2;
+                                            plots['city2']['text']['content'] = city2;
+                                } else if (positions[''+yearData+'']['city2'] == undefined){
+                                            plots['city2']['latitude'] = "300000";
+                                            plots['city2']['longitude'] = "3000000";
+                                            plots['city2']['text']['content'] = "";
+                                }
 
 
                                 // key = city1;
