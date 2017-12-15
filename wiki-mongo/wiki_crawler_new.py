@@ -6,7 +6,7 @@ import pymongo
 
 
 def mongo_connection():
-  mongo_URL = "mongodb://mongodb-stitch-olympics-xhlhd:cis550@cis550-shard-00-00-a0sk1.mongodb.net:27017,cis550-shard-00-01-a0sk1.mongodb.net:27017,cis550-shard-00-02-a0sk1.mongodb.net:27017/test?ssl=true&replicaSet=Cis550-shard-0&authSource=admin"
+  mongo_URL = "mongodb://mongodb-stitch-olympics-xhlhd:***@cis550-shard-00-00-a0sk1.mongodb.net:27017,cis550-shard-00-01-a0sk1.mongodb.net:27017,cis550-shard-00-02-a0sk1.mongodb.net:27017/test?ssl=true&replicaSet=Cis550-shard-0&authSource=admin"
   client = MongoClient(mongo_URL)
   db = client.data.olympics_new
   return db
